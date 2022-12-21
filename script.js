@@ -31,6 +31,15 @@ function pickMapTile(x, y, tileType) {
     else if (tileType === "p") { drawTileOnMap(2, 0, x, y) }
     else if (tileType === "f") { drawTileOnMap(3, 0, x, y) }
 
+    else if (tileType === "t") { drawTileOnMap(0, 1, x, y) }
+    else if (tileType === "b") { drawTileOnMap(1, 1, x, y) }
+    else if (tileType === "h") { drawTileOnMap(2, 1, x, y) }
+    else if (tileType === "w") { drawTileOnMap(3, 1, x, y) }
+    
+    else if (tileType === "B") { drawTileOnMap(1, 0, x, y); drawTileOnMap(2, 0, x, y) }
+
+    
+
 }
 
 function drawTileOnMap(xTilePos, yTilePos, xPos, yPos) {
