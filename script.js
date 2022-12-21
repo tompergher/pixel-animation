@@ -5,20 +5,37 @@ canvas.height = 15 * tileSize
 const ctx = canvas.getContext("2d")
 ctx.imageSmoothingEnabled = false
 const img = document.querySelector("#character")
-
-let x = 0
-let y = 0
+const ground = document.querySelector("#ground")
+const map = []
+let x = 64
+let y = 128
+let pos = 0
+let type = 0
+let frameCounter = 0
 
 function animationLoop () {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    ctx.drawImage(img, x, y, canvas.width, canvas.height)
+    drawMap()
+
+    ctx.drawImage(img, pos * tileSize, type * tileSize, tileSize, tileSize,
+        x, y, tileSize, tileSize)
+
+    frameCounter++
+    if (frameCounter >= 15) {
+        pos++
+        if (pos >= 3) {
+            pos = 0
+        }
+        frameCounter = 0
+    }
 
     window.requestAnimationFrame(animationLoop)
 }
 
 function main() {
     readMapFile("map.txt")
+    window.requestAnimationFrame(animationLoop)
 }
 
 function pickMapTile(x, y, tileType) {
@@ -42,8 +59,17 @@ function pickMapTile(x, y, tileType) {
 
 }
 
+function drawMap() {
+    for (let y = 0; y < map.length; y++) {
+      for (let x = 0; x < map[y].length; x++) {
+        pickMapTile(x, y, map[y][x]);
+      }
+    }
+}
+
 function drawTileOnMap(xTilePos, yTilePos, xPos, yPos) {
-    ctx.drawImage(img,
+    //console.log(xPos, yPos)
+    ctx.drawImage(ground,
         xTilePos * tileSize, yTilePos * tileSize, tileSize, tileSize,
         xPos*tileSize, yPos*tileSize, tileSize, tileSize)
 }
@@ -52,14 +78,17 @@ function readMapFile(filename) {
     fetch(filename).then((res) => res.text()).then((data) => {
         let rows = data.split("\n")
         for (let y = 0; y < rows.length; y++) {
-            let cells = rows[y].split("")
-            for (let x = 0; x < cells.length; x++) {
-                
-                pickMapTile(x, y, cells[x])
-
-            }
+            map.push(rows[y].split(""))
         }
     })
+}
+
+window.onkeydown = function(ev) {
+    console.log(ev.code)
+    if (ev.code === "ArrowUp") { type = 3}
+    if (ev.code === "ArrowDown") { type = 0}
+    if (ev.code === "ArrowLeft") { type = 1}
+    if (ev.code === "ArrowRight") { type = 2}
 }
 
 main()
