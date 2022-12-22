@@ -85,10 +85,10 @@ function readMapFile(filename) {
 
 window.onkeydown = function(ev) {
     console.log(ev.code)
-    if (ev.code === "ArrowUp") { type = 3}
-    if (ev.code === "ArrowDown") { type = 0}
-    if (ev.code === "ArrowLeft") { type = 1}
-    if (ev.code === "ArrowRight") { type = 2}
+    if (ev.code === "KeyW") { type = 3; y-=5}
+    if (ev.code === "KeyS") { type = 0; y+=5}
+    if (ev.code === "KeyA") { type = 1; x-=5}
+    if (ev.code === "KeyD") { type = 2; x+=5}
 }
 
 main()
