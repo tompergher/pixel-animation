@@ -59,7 +59,7 @@ class Background {
 
   draw() {
     ctx.drawImage(
-      ground,
+      this.sheet,
       this.col * this.tileSize, this.row * this.tileSize, this.tileSize, this.tileSize,
       this.x * this.tileSize, this.y * this.tileSize, this.tileSize, this.tileSize
     )
