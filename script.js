@@ -1,3 +1,5 @@
+import Map from "./map.js"
+
 const tileSize = 32
 const canvas = document.querySelector("#canvas")
 canvas.width = 10 * tileSize
@@ -6,82 +8,6 @@ const ctx = canvas.getContext("2d")
 ctx.imageSmoothingEnabled = false
 
 const img = document.querySelector("#character")
-const ground = document.querySelector("#ground")
-
-class Map {
-  constructor(mapFile) {
-    this.tiles = []
-    this._readMapFile(mapFile)
-  }
-
-  addTilesToMap(x, y, tileType) {
-    // TODO:
-    // Implementiere das erstellen von neuen Kartenkacheln hier
-    // x und y sind die Positionen in der Kartendatei
-    // tileType ist der Buchstabe der an dieser Stelle in der Kartendatei steht
-    // this.tiles ist eine noch leere Liste, welche alle neuen Kacheln aufnimmt
-
-    // Die Hintergrundkachel wird immer hinzugefügt!!! Andere Kacheln können dann
-    // darauf plaziert werden.
-    this.tiles.push( new Background(x, y) )
-    if ( tileType === "s" ) { this.tiles.push( new Stone(x, y)) }
-  }
-
-  drawMap() {
-    for (let i = 0; i < this.tiles.length; i++) {
-      this.tiles[i].draw()
-    }
-  }
-
-  _readMapFile(filename) {
-    fetch(filename)
-      .then((res) => res.text())
-      .then((data) => {
-        let rows = data.split("\n")
-        for (let y = 0; y < rows.length; y++) {
-          let row = rows[y].split("")
-          for (let x = 0; x < row.length; x++) {
-            this.addTilesToMap(x, y, row[x])
-          }
-        }
-      })
-  }
-}
-
-class GameObject {
-  constructor(x, y, sheet) {
-    this.sheet = sheet
-    this.x = x
-    this.y = y
-    this.tileSize = 32
-    this.col = 0
-    this.row = 0
-  }
-
-  draw() {
-    ctx.drawImage(
-      this.sheet,
-      this.col * this.tileSize, this.row * this.tileSize, this.tileSize, this.tileSize,
-      this.x * this.tileSize, this.y * this.tileSize, this.tileSize, this.tileSize
-    )
-  }
-}
-
-class Background extends GameObject {
-  constructor(x, y) {
-    super(x, y, ground)
-    this.row = 0
-    this.col = 0
-  }
-}
-
-class Stone extends GameObject {
-  constructor(x, y) {
-    super(x, y, ground)
-    this.row = 0
-    this.col = 1
-  }
-}
 
 let map = null
 
@@ -109,7 +35,7 @@ function animationLoop() {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  map.drawMap()
+  map.drawMap(ctx)
 
   ctx.drawImage(
     img,
