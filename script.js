@@ -1,3 +1,4 @@
+import { Player } from "./game_objects.js"
 import Map from "./map.js"
 
 const tileSize = 32
@@ -7,9 +8,8 @@ canvas.height = 15 * tileSize
 const ctx = canvas.getContext("2d")
 ctx.imageSmoothingEnabled = false
 
-const img = document.querySelector("#character")
-
 let map = null
+let player = null
 
 let x = 64
 let y = 128
@@ -37,39 +37,20 @@ function animationLoop() {
 
   map.drawMap(ctx)
 
-  ctx.drawImage(
-    img,
-    pos * tileSize,
-    type * tileSize,
-    tileSize,
-    tileSize,
-    x,
-    y,
-    tileSize,
-    tileSize
-  )
-
-  frameCounter++
-  if (frameCounter >= 15) {
-    pos++
-    if (pos >= 3) {
-      pos = 0
-    }
-    frameCounter = 0
-  }
+  player.draw(ctx)
 
   window.requestAnimationFrame(animationLoop)
 }
 
 function main() {
   map = new Map("map.txt")
+  player = new Player(4, 5)
   window.requestAnimationFrame(animationLoop)
 }
 
 window.onkeydown = function (ev) {
   if (ev.code === "KeyW") {
-    type = 3
-    dy = -1
+    player.move("up")
   }
   if (ev.code === "KeyS") {
     type = 0
