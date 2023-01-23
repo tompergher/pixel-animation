@@ -5,5 +5,9 @@ export default class EventHandler {
     window.onkeydown = (ev) => {this.events.add(ev.code)}
     window.onkeyup = (ev) => {this.events.delete(ev.code)}
   }
+
+  _handleEvents(gameObject) {
+    this.events.forEach((ev) => gameObject.handle(ev))
+  }
 }
 

@@ -40,25 +40,31 @@ export class Stone extends GameObject {
   }
 }
 
+
+
+
+
 export class Player extends GameObject {
   constructor(x, y) {
     super(x, y, img)
     this.row = 0
     this.col = 1
+    this.speed = 3 / this.tileSize
     this.eventHandler = new EventHandler()
   }
 
   update() {
-    this.eventHandler.events.forEach((ev) => this.handle(ev))
+    this.eventHandler._handleEvents(this)
   }
 
   handle(ev) {
-    if (ev === "KeyW") { this.move("up")}
+    if (ev === "KeyW") { this.move("up") }
   }
 
   move(direction) {
     if (direction === "up") {
-      this.y = this.y - 5 / this.tileSize
+      this.y = this.y - this.speed
+      this.row = 3
     }
   }
 }
