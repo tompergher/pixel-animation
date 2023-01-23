@@ -49,7 +49,11 @@ export class Player extends GameObject {
   }
 
   update() {
-    
+    this.eventHandler.events.forEach((ev) => this.handle(ev))
+  }
+
+  handle(ev) {
+    if (ev === "KeyW") { this.move("up")}
   }
 
   move(direction) {
