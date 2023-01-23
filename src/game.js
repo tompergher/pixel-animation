@@ -10,7 +10,7 @@ export default class Game {
     this.ctx = this.canvas.getContext("2d")
     this.ctx.imageSmoothingEnabled = false
 
-    this.map = new Map("map.txt")
+    this.map = new Map("maps/map.txt")
     this.player = new Player(4, 5)
   }
 
