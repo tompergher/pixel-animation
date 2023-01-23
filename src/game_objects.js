@@ -1,10 +1,5 @@
 import EventHandler from "./event_handler.js"
 
-const ground = document.querySelector("#ground")
-const img = document.querySelector("#character")
-
-
-
 export class GameObject {
   constructor(x, y, sheet) {
     this.sheet = sheet
@@ -26,6 +21,7 @@ export class GameObject {
 
 export class Background extends GameObject {
   constructor(x, y) {
+    const ground = document.querySelector("#ground")
     super(x, y, ground)
     this.row = 0
     this.col = 0
@@ -34,6 +30,7 @@ export class Background extends GameObject {
 
 export class Stone extends GameObject {
   constructor(x, y) {
+    const ground = document.querySelector("#ground")
     super(x, y, ground)
     this.row = 0
     this.col = 1
@@ -46,6 +43,7 @@ export class Stone extends GameObject {
 
 export class Player extends GameObject {
   constructor(x, y) {
+    const img = document.querySelector("#character")
     super(x, y, img)
     this.row = 0
     this.col = 1
