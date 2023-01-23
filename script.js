@@ -23,7 +23,8 @@ class Map {
 
     // Die Hintergrundkachel wird immer hinzugefügt!!! Andere Kacheln können dann
     // darauf plaziert werden.
-    this.tiles.push(new Background(x, y))
+    this.tiles.push( new Background(x, y) )
+    if ( tileType === "s" ) { this.tiles.push( new Stone(x, y)) }
   }
 
   drawMap() {
@@ -47,9 +48,9 @@ class Map {
   }
 }
 
-class Background {
-  constructor(x, y) {
-    this.sheet = ground
+class GameObject {
+  constructor(x, y, sheet) {
+    this.sheet = sheet
     this.x = x
     this.y = y
     this.tileSize = 32
@@ -63,6 +64,22 @@ class Background {
       this.col * this.tileSize, this.row * this.tileSize, this.tileSize, this.tileSize,
       this.x * this.tileSize, this.y * this.tileSize, this.tileSize, this.tileSize
     )
+  }
+}
+
+class Background extends GameObject {
+  constructor(x, y) {
+    super(x, y, ground)
+    this.row = 0
+    this.col = 0
+  }
+}
+
+class Stone extends GameObject {
+  constructor(x, y) {
+    super(x, y, ground)
+    this.row = 0
+    this.col = 1
   }
 }
 
