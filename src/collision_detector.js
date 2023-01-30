@@ -28,9 +28,8 @@ export default class CollosionDetector {
             if ( h1.getBottom() > h2.getTop() && h1.getTop() < h2.getBottom() ) {
                 return true
             }
-        } else {
-            return false
         }
+        return false
     }
     
 }
