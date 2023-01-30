@@ -7,6 +7,7 @@ import CollosionDetector from "./collision_detector.js"
 export default class Game {
 
   static CD = new CollosionDetector()
+  static map = new Map("maps/map.txt")
 
   constructor() {
     this.tileSize = 32
@@ -16,17 +17,16 @@ export default class Game {
     this.ctx = this.canvas.getContext("2d")
     this.ctx.imageSmoothingEnabled = false
 
-    this.map = new Map("maps/map.txt")
     this.player = new Player(4, 5)
   }
 
   gameLoop() {
     this.player.update()
-    Game.CD.checkCollision(0)
+    Game.CD.checkCollision("world")
 
     this.ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    this.map.drawMap(this.ctx)
+    Game.map.drawMap(this.ctx)
     this.player.draw(this.ctx)
   }
 }

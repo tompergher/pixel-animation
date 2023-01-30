@@ -37,8 +37,20 @@ export class Stone extends GameObject {
     super(x, y, ground)
     this.row = 0
     this.col = 1
-    Game.CD.layers[0].push(this)
-
+    Game.CD.layers["world"].push(this)
+  }
+  
+  destroy() {
+    console.log("Stone!!!")
+    let index = Game.map.tiles.findIndex(item => item === this)
+    if (index > -1) {
+      Game.map.tiles.splice(index, 1)
+    }
+    index = Game.CD.layers["world"].findIndex(item => item === this)
+    if (index > -1) {
+      Game.CD.layers["world"].splice(index, 1)
+    }
+    console.log(index)
   }
 }
 
@@ -50,7 +62,7 @@ export class Player extends GameObject {
     this.col = 1
     this.speed = 3 / this.tileSize
     this.eventHandler = new EventHandler()
-    Game.CD.layers[0].push(this)
+    Game.CD.layers["world"].push(this)
 
     this.addEventListener('collision', (e) => {
       this.handleCollision(e)
@@ -58,6 +70,7 @@ export class Player extends GameObject {
   }
 
   handleCollision(e) {
+    e.detail.destroy()
     const pen = calculatePenetration(this, e.detail)
     if (Math.abs(pen.x) <= Math.abs(pen.y) ) {
       this.x = this.x - pen.x

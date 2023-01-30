@@ -1,6 +1,8 @@
 export default class CollosionDetector {
     constructor(){
-        this.layers = [[]];
+        this.layers = {
+            world: []
+        };
     }
 
     checkCollision(layer){
