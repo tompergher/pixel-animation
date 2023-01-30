@@ -47,6 +47,21 @@ export class Stone extends GameObject {
   }
 }
 
+export class Tree extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#ground")
+    super(x, y, ground)
+    this.row = 1
+    this.col = 1
+    Game.CD.layers["forest"].push(this)
+  }
+  
+  destroy() {
+    findAndRemoveFromList(Game.map.tiles, this)
+    findAndRemoveFromList(Game.CD.layers["forest"], this)
+  }
+}
+
 export class Player extends GameObject {
   constructor(x, y) {
     const img = document.querySelector("#character")
@@ -63,14 +78,13 @@ export class Player extends GameObject {
   }
 
   handleCollision(e) {
-    e.detail.destroy()
+    // e.detail.destroy()
     const pen = calculatePenetration(this, e.detail)
     if (Math.abs(pen.x) <= Math.abs(pen.y) ) {
       this.x = this.x - pen.x
-  } else {
-    this.y = this.y - pen.y
-  }
-
+    } else {
+      this.y = this.y - pen.y
+    }
   }
 
   update() {

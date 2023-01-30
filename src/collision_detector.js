@@ -1,7 +1,8 @@
 export default class CollosionDetector {
     constructor(){
         this.layers = {
-            world: []
+            world: [],
+            forest: [],
         };
     }
 
