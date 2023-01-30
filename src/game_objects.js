@@ -80,12 +80,7 @@ export class Player extends GameObject {
   handleCollision(e) {
     console.log("collision")
     const pen = calculatePenetration(this, e.detail)
-
-    if (Math.abs(pen.x) <= Math.abs(pen.y) ) {
-      this.x = this.x - pen.x
-    } else {
-      this.y = this.y - pen.y
-    }
+    // TODO: implementiere Kollisionsauflösung
   }
 
   update() {
