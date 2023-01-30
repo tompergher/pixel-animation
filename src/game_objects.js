@@ -1,6 +1,7 @@
 import EventHandler from "./event_handler.js"
 import Game from "./game.js"
 import {calculatePenetration} from "./collision_detector.js"
+import { findAndRemoveFromList } from "./utils.js"
 
 export class GameObject extends EventTarget {
   constructor(x, y, sheet) {
@@ -41,16 +42,8 @@ export class Stone extends GameObject {
   }
   
   destroy() {
-    console.log("Stone!!!")
-    let index = Game.map.tiles.findIndex(item => item === this)
-    if (index > -1) {
-      Game.map.tiles.splice(index, 1)
-    }
-    index = Game.CD.layers["world"].findIndex(item => item === this)
-    if (index > -1) {
-      Game.CD.layers["world"].splice(index, 1)
-    }
-    console.log(index)
+    findAndRemoveFromList(Game.map.tiles, this)
+    findAndRemoveFromList(Game.CD.layers["world"], this)
   }
 }
 
