@@ -1,7 +1,10 @@
 import EventHandler from "./event_handler.js"
+import Game from "./game.js"
+import {calculatePenetration} from "./collision_detector.js"
 
-export class GameObject {
+export class GameObject extends EventTarget {
   constructor(x, y, sheet) {
+    super()
     this.sheet = sheet
     this.x = x
     this.y = y
@@ -34,12 +37,10 @@ export class Stone extends GameObject {
     super(x, y, ground)
     this.row = 0
     this.col = 1
+    Game.CD.layers[0].push(this)
+
   }
 }
-
-
-
-
 
 export class Player extends GameObject {
   constructor(x, y) {
@@ -49,6 +50,21 @@ export class Player extends GameObject {
     this.col = 1
     this.speed = 3 / this.tileSize
     this.eventHandler = new EventHandler()
+    Game.CD.layers[0].push(this)
+
+    this.addEventListener('collision', (e) => {
+      this.handleCollision(e)
+    })
+  }
+
+  handleCollision(e) {
+    const pen = calculatePenetration(this, e.detail)
+    if (Math.abs(pen.x) <= Math.abs(pen.y) ) {
+      this.x = this.x - pen.x
+  } else {
+    this.y = this.y - pen.y
+  }
+
   }
 
   update() {
@@ -57,12 +73,24 @@ export class Player extends GameObject {
 
   handle(ev) {
     if (ev === "KeyW") { this.move("up") }
+    if (ev === "KeyS") { this.move("down") }
+    if (ev === "KeyA") { this.move("left") }
+    if (ev === "KeyD") { this.move("right") }
   }
 
   move(direction) {
     if (direction === "up") {
       this.y = this.y - this.speed
       this.row = 3
+    } else if (direction === "down") {
+      this.y = this.y + this.speed
+      this.row = 0
+    } else if (direction === "left") {
+      this.x = this.x - this.speed
+      this.row = 1
+    } else if (direction === "right") {
+      this.x = this.x + this.speed
+      this.row = 2
     }
   }
 }

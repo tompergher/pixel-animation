@@ -1,7 +1,13 @@
 import { Player } from "./game_objects.js"
 import Map from "./map.js"
+import CollosionDetector from "./collision_detector.js"
+
+
 
 export default class Game {
+
+  static CD = new CollosionDetector()
+
   constructor() {
     this.tileSize = 32
     this.canvas = document.querySelector("#canvas")
@@ -16,6 +22,7 @@ export default class Game {
 
   gameLoop() {
     this.player.update()
+    Game.CD.checkCollision(0)
 
     this.ctx.clearRect(0, 0, canvas.width, canvas.height)
 
