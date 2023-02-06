@@ -1,6 +1,7 @@
 import { Player } from "./game_objects.js"
 import Map from "./map.js"
 import CollisionDetector from "./collision_detector.js"
+import Camera from "./camera.js"
 
 
 
@@ -18,13 +19,18 @@ export default class Game {
     this.ctx.imageSmoothingEnabled = false
 
     this.player = new Player(4, 5)
+    this.camera = new Camera(this)
   }
 
   gameLoop() {
+    
+    this.camera.clearScreen()
+
     this.player.update()
     Game.CD.checkCollision("all")
 
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height)
+    this.camera.centerObject(this.player)
+    this.camera.offset = {x: -1, y: 0}
 
     Game.map.drawMap(this.ctx)
     this.player.draw(this.ctx)
