@@ -24,7 +24,11 @@ export default class CollosionDetector {
     }
 
     hitboxOverlapping(h1, h2) {
-        // TODO: Implementiere Kollisionserkennung
+        if ( h1.getRight() > h2.getLeft() && h1.getLeft() < h2.getRight()) {
+            if ( h1.getBottom() > h2.getTop() && h1.getTop() < h2.getBottom() ) {
+                return true
+            }
+        }
         return false
     }
     
