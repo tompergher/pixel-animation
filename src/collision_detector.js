@@ -1,15 +1,26 @@
-export default class CollosionDetector {
+export default class CollisionDetector {
     constructor(){
         this.layers = {
             world: [],
             forest: [],
+            pickups: [],
         };
     }
 
     checkCollision(layer){
-        this.layers[layer].forEach(tile => {
+        if (layer === "all") {
+            Object.entries(this.layers).forEach(([_, currentLayer]) => {
+                this.detectCollisionsInLayer(currentLayer)
+            })
+        } else {
+            this.detectCollisionsInLayer(this.layers[layer])
+        }
+    }
+
+    detectCollisionsInLayer(currentLayer){
+        currentLayer.forEach(tile => {
             const h1 = new Hitbox(tile);
-            this.layers[layer].forEach(other => {
+            currentLayer.forEach(other => {
                 if (tile === other) {
                     return false
                 } else {
@@ -24,7 +35,11 @@ export default class CollosionDetector {
     }
 
     hitboxOverlapping(h1, h2) {
-        // TODO: Implementiere Kollisionserkennung
+        if ( h1.getRight() > h2.getLeft() && h1.getLeft() < h2.getRight()) {
+            if ( h1.getBottom() > h2.getTop() && h1.getTop() < h2.getBottom() ) {
+                return true
+            }
+        }
         return false
     }
     
