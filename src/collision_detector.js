@@ -1,4 +1,4 @@
-export default class CollosionDetector {
+export default class CollisionDetector {
     constructor(){
         this.layers = {
             world: [],

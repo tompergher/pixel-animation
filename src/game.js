@@ -1,12 +1,12 @@
 import { Player } from "./game_objects.js"
 import Map from "./map.js"
-import CollosionDetector from "./collision_detector.js"
+import CollisionDetector from "./collision_detector.js"
 
 
 
 export default class Game {
 
-  static CD = new CollosionDetector()
+  static CD = new CollisionDetector()
   static map = new Map("maps/map.txt")
 
   constructor() {
