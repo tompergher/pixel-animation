@@ -22,7 +22,7 @@ export default class Game {
 
   gameLoop() {
     this.player.update()
-    Game.CD.checkCollision("world")
+    Game.CD.checkCollision("all")
 
     this.ctx.clearRect(0, 0, canvas.width, canvas.height)
 

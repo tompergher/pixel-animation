@@ -3,13 +3,24 @@ export default class CollisionDetector {
         this.layers = {
             world: [],
             forest: [],
+            pickups: [],
         };
     }
 
     checkCollision(layer){
-        this.layers[layer].forEach(tile => {
+        if (layer === "all") {
+            Object.entries(this.layers).forEach(([_, currentLayer]) => {
+                this.detectCollisionsInLayer(currentLayer)
+            })
+        } else {
+            this.detectCollisionsInLayer(this.layers[layer])
+        }
+    }
+
+    detectCollisionsInLayer(currentLayer){
+        currentLayer.forEach(tile => {
             const h1 = new Hitbox(tile);
-            this.layers[layer].forEach(other => {
+            currentLayer.forEach(other => {
                 if (tile === other) {
                     return false
                 } else {
