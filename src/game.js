@@ -20,17 +20,20 @@ export default class Game {
 
     this.player = new Player(4, 5)
     this.camera = new Camera(this)
+
+    this.camera.moveToPoint(-1, 2, this.player.tileSize, 60)
   }
 
   gameLoop() {
     
     this.camera.clearScreen()
+    this.camera.nextFrame()
 
     this.player.update()
     Game.CD.checkCollision("all")
 
     this.camera.centerObject(this.player)
-    this.camera.offset = {x: -1, y: 0}
+    //this.camera.offset = {x: -1, y: 0}
 
     Game.map.drawMap(this.ctx)
     this.player.draw(this.ctx)

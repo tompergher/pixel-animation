@@ -2,6 +2,8 @@ export default class Camera {
   constructor(game, offset = { x: 0, y: 0 }) {
     this.game = game
     this.offset = offset
+    this.interpolate = {x: 0, y: 0}
+    this.framesMoved = 0
   }
 
   clearScreen() {
@@ -18,4 +20,27 @@ export default class Camera {
       (-x + this.offset.x) * tileSize + this.game.canvas.width/2,
       (-y + this.offset.y) * tileSize +this.game.canvas.height / 2)
   }
+
+  moveToPoint(x, y, tileSize, numerOfFrames) {
+    tileSize = 1
+    this.framesToMove = numerOfFrames
+    this.interpolate = {
+      x: x * tileSize / numerOfFrames,
+      y: y * tileSize / numerOfFrames,
+    }
+  }
+
+  nextFrame() {
+    if ( this.framesToMove === 0) return
+    if ( this.interpolate == {x: 0, y: 0}) return
+    this.framesMoved++
+    if (this.framesMoved >= this.framesToMove) {
+      this.framesToMove = 0
+      this.interpolate = {x: 0, y: 0}
+      this.framesMoved = 0
+    }
+    this.offset.x += this.interpolate.x
+    this.offset.y += this.interpolate.y
+  }
+    
 }
