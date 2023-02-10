@@ -107,6 +107,8 @@ export class Player extends AnimatedGameObject {
     this.col = 1
     this.speed = 3 / this.tileSize
     this.eventHandler = new EventHandler()
+    this.gravity = 0
+    this.max_gravity = 5 / this.tileSize
 
     this.addEventListener('collision', (e) => {
       this.handleCollision(e.detail)
@@ -120,6 +122,10 @@ export class Player extends AnimatedGameObject {
         this.x = this.x - pen.x
       } else {
         this.y = this.y - pen.y
+        if ( this.gravity >= 0) {
+          this.isStanding = true
+        }
+        this.gravity = 0
       }
     }
     if (collidingObject.layers.includes("pickups")) {
@@ -127,8 +133,17 @@ export class Player extends AnimatedGameObject {
     }
   }
 
+  jump() {
+    if (this.isStanding ) {
+      this.gravity = -16 / this.tileSize
+      this.isStanding = false
+    }
+  }
+
   update() {
     super.update()
+    this.y = this.y + this.gravity
+    this.gravity = Math.min(this.gravity + 0.02, this.max_gravity)
     this.eventHandler._handleEvents(this)
   }
 
@@ -137,6 +152,7 @@ export class Player extends AnimatedGameObject {
     if (ev === "KeyS") { this.move("down") }
     if (ev === "KeyA") { this.move("left") }
     if (ev === "KeyD") { this.move("right") }
+    if (ev === "Space") { this.jump() }
   }
 
   move(direction) {
