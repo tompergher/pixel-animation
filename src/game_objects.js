@@ -1,20 +1,24 @@
 import EventHandler from "./event_handler.js"
-import Game from "./game.js"
+import Game, { TileRegistry } from "./game.js"
 import {calculatePenetration} from "./collision_detector.js"
 import { findAndRemoveFromList } from "./utils.js"
 
 export class GameObject extends EventTarget {
-  constructor(x, y, sheet, layers) {
+  constructor(x, y, options = {sheet, layers: [], collisionTags: []}) {
     super()
-    this.sheet = sheet
+    this.sheet = options.sheet
     this.x = x
     this.y = y
     this.tileSize = 32
     this.col = 0
     this.row = 0
-    this.layers = layers
+    this.layers = options.layers
     this.layers.forEach(layer => {
-      Game.CD.layers[layer].push(this)
+      TileRegistry.layers[layer].push(this)
+    })
+    this.collisionTags = options.collisionTags
+    this.collisionTags.forEach(tag => {
+      Game.CD.layers[tag].push(this)
     })
   }
 
@@ -27,9 +31,11 @@ export class GameObject extends EventTarget {
   }
 
   destroy() {
-    findAndRemoveFromList(Game.map.tiles, this)
     this.layers.forEach(layer => {
-      findAndRemoveFromList(Game.CD.layers[layer], this)
+      findAndRemoveFromList(TileRegistry.layers[layer], this)
+    })
+    this.collisionTags.forEach(tag => {
+      findAndRemoveFromList(Game.CD.layers[tag], this)
     })
   }
 }
@@ -37,7 +43,12 @@ export class GameObject extends EventTarget {
 export class Background extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")
-    super(x, y, ground, [])
+    super(x, y, {
+      sheet: ground,
+      layers: ["background"],
+      collisionTags: []
+    })
+
     this.row = 0
     this.col = 0
   }
@@ -46,7 +57,11 @@ export class Background extends GameObject {
 export class Stone extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")
-    super(x, y, ground, ["world"])
+    super(x, y, {
+      sheet: ground,
+      layers: ["world"],
+      collisionTags: ["world"]
+    })
     this.row = 0
     this.col = 1
   }
@@ -55,7 +70,11 @@ export class Stone extends GameObject {
 export class Tree extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")
-    super(x, y, ground, ["forest"])
+    super(x, y, {
+      sheet: ground,
+      layers: ["map"],
+      collisionTags: ["world"]
+    })
     this.row = 1
     this.col = 1
   }
@@ -64,15 +83,19 @@ export class Tree extends GameObject {
 export class Mushroom extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")
-    super(x, y, ground, ["pickups"])
+    super(x, y, {
+      sheet: ground,
+      layers: ["pickups"],
+      collisionTags: ["pickups"]
+    })
     this.row = 0
     this.col = 2
   }
 }
 
 class AnimatedGameObject extends GameObject {
-  constructor(x, y, sheet, layers) {
-    super(x, y, sheet, layers)
+  constructor(x, y, options) {
+    super(x, y, options)
     this.frameCounter = 0
     this.dx = 0
     this.dy = 0
@@ -102,7 +125,11 @@ class AnimatedGameObject extends GameObject {
 export class Player extends AnimatedGameObject {
   constructor(x, y) {
     const img = document.querySelector("#character")
-    super(x, y, img, ["world", "forest", "pickups"])
+    super(x, y, {
+      sheet: img,
+      layers: ["player"],
+      collisionTags: ["world"]
+    })
     this.row = 0
     this.col = 1
     this.speed = 3 / this.tileSize

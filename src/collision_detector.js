@@ -1,10 +1,22 @@
 export default class CollisionDetector {
     constructor(){
         this.layers = {
+            map: [],
+            background: [],
             world: [],
             forest: [],
             pickups: [],
+            player: [],
+            item: []
         };
+    }
+
+    drawAllTiles(ctx){
+        Object.entries(this.layers).forEach(([_, layer]) => {
+            layer.forEach((tile) => {
+                tile.draw(ctx)
+            })
+        })
     }
 
     checkCollision(layer){
