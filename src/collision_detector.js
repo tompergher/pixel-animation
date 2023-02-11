@@ -7,6 +7,14 @@ export default class CollisionDetector {
         };
     }
 
+    drawAllTiles(ctx){
+        Object.entries(this.layers).forEach(([_, layer]) => {
+            layer.forEach((tile) => {
+                tile.draw(ctx)
+            })
+        })
+    }
+
     checkCollision(layer){
         if (layer === "all") {
             Object.entries(this.layers).forEach(([_, currentLayer]) => {

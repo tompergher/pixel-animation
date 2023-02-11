@@ -1,20 +1,22 @@
 import EventHandler from "./event_handler.js"
-import Game from "./game.js"
+import Game, { TileRegistry } from "./game.js"
 import {calculatePenetration} from "./collision_detector.js"
 import { findAndRemoveFromList } from "./utils.js"
 
 export class GameObject extends EventTarget {
-  constructor(x, y, sheet, layers) {
+  constructor(x, y, options = {sheet, layer: "background", collisionTags: []}) {
     super()
-    this.sheet = sheet
+    this.sheet = options.sheet
     this.x = x
     this.y = y
     this.tileSize = 32
     this.col = 0
     this.row = 0
-    this.layers = layers
-    this.layers.forEach(layer => {
-      Game.CD.layers[layer].push(this)
+    this.layer = options.layer
+    TileRegistry.layers[this.layer].push(this)
+    this.collisionTags = options.collisionTags
+    this.collisionTags.forEach(tag => {
+      Game.CD.layers[tag].push(this)
     })
   }
 
@@ -27,9 +29,9 @@ export class GameObject extends EventTarget {
   }
 
   destroy() {
-    findAndRemoveFromList(Game.map.tiles, this)
-    this.layers.forEach(layer => {
-      findAndRemoveFromList(Game.CD.layers[layer], this)
+    findAndRemoveFromList(TileRegistry.layers[this.layer], this)
+    this.collisionTags.forEach(tag => {
+      findAndRemoveFromList(Game.CD.layers[tag], this)
     })
   }
 }
@@ -37,7 +39,12 @@ export class GameObject extends EventTarget {
 export class Background extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")
-    super(x, y, ground, [])
+    super(x, y, {
+      sheet: ground,
+      layer: "background",
+      collisionTags: []
+    })
+
     this.row = 0
     this.col = 0
   }
@@ -46,7 +53,11 @@ export class Background extends GameObject {
 export class Stone extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")
-    super(x, y, ground, ["world"])
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
     this.row = 0
     this.col = 1
   }
@@ -55,7 +66,11 @@ export class Stone extends GameObject {
 export class Tree extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")
-    super(x, y, ground, ["forest"])
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["forest"]
+    })
     this.row = 1
     this.col = 1
   }
@@ -64,15 +79,19 @@ export class Tree extends GameObject {
 export class Mushroom extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")
-    super(x, y, ground, ["pickups"])
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
     this.row = 0
     this.col = 2
   }
 }
 
 class AnimatedGameObject extends GameObject {
-  constructor(x, y, sheet, layers) {
-    super(x, y, sheet, layers)
+  constructor(x, y, options) {
+    super(x, y, options)
     this.frameCounter = 0
     this.dx = 0
     this.dy = 0
@@ -102,11 +121,17 @@ class AnimatedGameObject extends GameObject {
 export class Player extends AnimatedGameObject {
   constructor(x, y) {
     const img = document.querySelector("#character")
-    super(x, y, img, ["world", "forest", "pickups"])
+    super(x, y, {
+      sheet: img,
+      layer: "player",
+      collisionTags: ["world", "pickups"]
+    })
     this.row = 0
     this.col = 1
     this.speed = 3 / this.tileSize
     this.eventHandler = new EventHandler()
+    this.gravity = 0
+    this.max_gravity = 0//5 / this.tileSize
 
     this.addEventListener('collision', (e) => {
       this.handleCollision(e.detail)
@@ -114,21 +139,35 @@ export class Player extends AnimatedGameObject {
   }
 
   handleCollision(collidingObject) {
-    if (collidingObject.layers.includes("world") || collidingObject.layers.includes("forest")) {
+    if (collidingObject.collisionTags.includes("world") 
+      || collidingObject.collisionTags.includes("forest")) {
       const pen = calculatePenetration(this, collidingObject)
       if (Math.abs(pen.x) <= Math.abs(pen.y) ) {
         this.x = this.x - pen.x
       } else {
         this.y = this.y - pen.y
+        if ( this.gravity >= 0) {
+          this.isStanding = true
+        }
+        this.gravity = 0
       }
     }
-    if (collidingObject.layers.includes("pickups")) {
+    if (collidingObject.collisionTags.includes("pickups")) {
       collidingObject.destroy()
+    }
+  }
+
+  jump() {
+    if (this.isStanding ) {
+      this.gravity = -16 / this.tileSize
+      this.isStanding = false
     }
   }
 
   update() {
     super.update()
+    this.y = this.y + this.gravity
+    this.gravity = Math.min(this.gravity + 0.02, this.max_gravity)
     this.eventHandler._handleEvents(this)
   }
 
@@ -137,6 +176,7 @@ export class Player extends AnimatedGameObject {
     if (ev === "KeyS") { this.move("down") }
     if (ev === "KeyA") { this.move("left") }
     if (ev === "KeyD") { this.move("right") }
+    if (ev === "Space") { this.jump() }
   }
 
   move(direction) {
