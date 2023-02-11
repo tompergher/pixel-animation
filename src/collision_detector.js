@@ -1,13 +1,9 @@
 export default class CollisionDetector {
     constructor(){
         this.layers = {
-            map: [],
-            background: [],
             world: [],
             forest: [],
             pickups: [],
-            player: [],
-            item: []
         };
     }
 

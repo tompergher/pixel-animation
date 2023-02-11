@@ -7,12 +7,9 @@ export class TileRegistry {
   static instance = null
   static layers = {
       background: [],
-      world: [],
-      map: [],
-      items: [],
-      player: [],
       item: [],
-      pickups: []
+      player: [],
+      world: [],
     }
 
   static getInstance() {
