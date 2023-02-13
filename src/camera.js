@@ -12,6 +12,7 @@ export default class Camera {
   }
 
   centerObject(object) {
+    if (object == null) return
     this.centerCoordinate(object.x, object.y)
   }
 

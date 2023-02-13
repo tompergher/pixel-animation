@@ -12,6 +12,7 @@ export class GameObject extends EventTarget {
     this.col = 0
     this.row = 0
     this.layer = options.layer
+    this.handlers = new HandlerManager([])
     TileRegistry.layers[this.layer].push(this)
     this.collisionTags = options.collisionTags
     this.collisionTags.forEach(tag => {
@@ -33,6 +34,12 @@ export class GameObject extends EventTarget {
       findAndRemoveFromList(Game.CD.layers[tag], this)
     })
   }
+
+  update(){
+    this.handlers && this.handlers.runAll(this)
+  }
+
+
 }
 
 export class Background extends GameObject {
@@ -59,11 +66,21 @@ export class Stone extends GameObject {
     })
     this.row = 0
     this.col = 1
+  }
+}
 
+export class FallingStone extends Stone {
+  constructor(x, y) {
+    super(x, y)
     this.handlers = new HandlerManager([
-      new GravityHandler({maxGravity: 1}),
+      new GravityHandler({
+        maxGravity: 3,
+        gravityForce: 1
+      }),
+      new CollisionHandler()
     ])
   }
+  
 }
 
 export class Tree extends GameObject {
@@ -101,6 +118,7 @@ class AnimatedGameObject extends GameObject {
   }
 
   update() {
+    super.update()
     this.x = this.x + this.dx
     this.y = this.y + this.dy
     this.dx = 0
@@ -129,10 +147,6 @@ export class Player extends AnimatedGameObject {
       new CollisionHandler(),
       new AnimationHandler({ framesPerAnimation: 15, numberOfFrames: 3})
     ])
-
-    this.addEventListener('collision', (e) => {
-      this.handlers.get(CollisionHandler)._handleEvents(this, {other: e.detail})
-    })
   }
 
   jump() {
@@ -141,7 +155,6 @@ export class Player extends AnimatedGameObject {
 
   update() {
     super.update()
-    this.handlers.runAll(this)
   }
 
   handle(ev) {

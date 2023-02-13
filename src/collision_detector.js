@@ -1,3 +1,5 @@
+import { CollisionHandler } from "./event_handler.js";
+
 export default class CollisionDetector {
     constructor(){
         this.layers = {
@@ -34,8 +36,8 @@ export default class CollisionDetector {
                 } else {
                     const h2 = new Hitbox(other);
                     const collision = this.hitboxOverlapping(h1, h2);
-                    if (collision) {
-                        tile.dispatchEvent(new CustomEvent('collision', {detail: other}));
+                    if (collision && tile.handlers.get(CollisionHandler)) {
+                        tile.handlers.get(CollisionHandler)._handleEvents(tile, {other: other})
                     }
                 }
             })

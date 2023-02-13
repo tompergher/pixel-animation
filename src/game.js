@@ -1,4 +1,3 @@
-import { Player } from "./game_objects.js"
 import Map from "./map.js"
 import CollisionDetector from "./collision_detector.js"
 import Camera from "./camera.js"
@@ -31,6 +30,14 @@ export class TileRegistry {
       })
     })
   }
+
+  static updateAllTiles() {
+    Object.entries(TileRegistry.layers).forEach(([_, layer]) => {
+      layer.forEach(tile => {
+        tile.update()
+      })
+    })
+  }
 }
 
 
@@ -40,6 +47,7 @@ export default class Game {
   static CD = new CollisionDetector()
   static map = new Map("maps/map.txt")
   static TileRegistry;
+  static player = null;
 
   constructor() {
     this.tileSize = 32
@@ -50,7 +58,6 @@ export default class Game {
     this.ctx.imageSmoothingEnabled = false
     Game.TileRegistry = TileRegistry.getInstance()
 
-    this.player = new Player(4, 5)
     this.camera = new Camera(this)
 
   }
@@ -60,13 +67,11 @@ export default class Game {
     this.camera.clearScreen()
     this.camera.nextFrame()
 
-    this.player.update()
+    TileRegistry.updateAllTiles()
     Game.CD.checkCollision("all")
 
-    this.camera.centerObject(this.player)
+    this.camera.centerObject(Game.player)
 
     TileRegistry.drawAllTiles(this.ctx)
-    // Game.map.drawMap(this.ctx)
-    // this.player.draw(this.ctx)
   }
 }

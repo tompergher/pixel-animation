@@ -1,4 +1,5 @@
 import { calculatePenetration } from "./collision_detector.js"
+import { Player } from "./game_objects.js"
 
 export default class EventHandler {
   constructor() {
@@ -18,7 +19,7 @@ export class GravityHandler {
     this.gravity = 0
     this.maxGravity = options.maxGravity
     this.jumpForce = options.jumpForce
-    this.gravityForce = options.gravityForce || 0.01
+    this.gravityForce = options.gravityForce || 0
   }
 
   jump(gameObject) {
@@ -59,9 +60,17 @@ export class HandlerManager {
 
 export class CollisionHandler {
   _handleEvents(gameObject, options) {
+    // Es soll nichts passieren wenn kein anderes Objekt gesetzt wird
     if (options == null) return
 
+    // Wenn das andere Objekt der Spieler ist, soll nicht passieren
+    if (options.other instanceof Player) return
+
     let collidingObject = options.other
+
+    // Wenn das andere Objekt aus der Welt oder dem Wald ist,
+    // soll eine Überschneidung vermieden werden, indem das
+    // Objekt aus dem überschneidenden Objekt herausgedrückt wird.
     if (collidingObject.collisionTags.includes("world") || collidingObject.collisionTags.includes("forest")) {
       const pen = calculatePenetration(gameObject, collidingObject)
       if (Math.abs(pen.x) <= Math.abs(pen.y)) {
@@ -74,6 +83,8 @@ export class CollisionHandler {
         gameObject.handlers.get(GravityHandler).gravity = 0
       }
     }
+
+    // Wenn das kollidierende Objekt aus Pickups ist, wird es entfernt.
     if (collidingObject.collisionTags.includes("pickups")) {
       collidingObject.destroy()
     }
