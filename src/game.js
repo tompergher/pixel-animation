@@ -53,7 +53,6 @@ export default class Game {
     this.player = new Player(4, 5)
     this.camera = new Camera(this)
 
-    this.camera.moveToPoint(-1, 2, this.player.tileSize, 60)
   }
 
   gameLoop() {

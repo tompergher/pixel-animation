@@ -12,21 +12,20 @@ export default class Camera {
   }
 
   centerObject(object) {
-    this.centerCoordinate(object.x, object.y, object.tileSize)
+    this.centerCoordinate(object.x, object.y)
   }
 
-  centerCoordinate(x, y, tileSize) {
+  centerCoordinate(x, y) {
     this.game.ctx.setTransform(1, 0, 0, 1,
-      (-x + this.offset.x) * tileSize + this.game.canvas.width/2,
-      (-y + this.offset.y) * tileSize +this.game.canvas.height / 2)
+      (-x + this.offset.x) + this.game.canvas.width/2,
+      (-y + this.offset.y) +this.game.canvas.height / 2)
   }
 
-  moveToPoint(x, y, tileSize, numerOfFrames) {
-    tileSize = 1
+  moveToPoint(x, y, numerOfFrames) {
     this.framesToMove = numerOfFrames
     this.interpolate = {
-      x: x * tileSize / numerOfFrames,
-      y: y * tileSize / numerOfFrames,
+      x: x / numerOfFrames,
+      y: y / numerOfFrames,
     }
   }
 

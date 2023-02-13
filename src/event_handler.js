@@ -18,6 +18,7 @@ export class GravityHandler {
     this.gravity = 0
     this.maxGravity = options.maxGravity
     this.jumpForce = options.jumpForce
+    this.gravityForce = options.gravityForce || 0.01
   }
 
   jump(gameObject) {
@@ -29,7 +30,7 @@ export class GravityHandler {
 
   _handleEvents(gameObject) {
     gameObject.y = gameObject.y + this.gravity
-    this.gravity = Math.min(this.gravity + 0.02, this.maxGravity)
+    this.gravity = Math.min(this.gravity + this.gravityForce, this.maxGravity)
   }
 }
 

@@ -6,9 +6,9 @@ export class GameObject extends EventTarget {
   constructor(x, y, options = {sheet, layer: "background", collisionTags: []}) {
     super()
     this.sheet = options.sheet
-    this.x = x
-    this.y = y
     this.tileSize = 32
+    this.x = x * this.tileSize
+    this.y = y * this.tileSize
     this.col = 0
     this.row = 0
     this.layer = options.layer
@@ -23,7 +23,7 @@ export class GameObject extends EventTarget {
     ctx.drawImage(
       this.sheet,
       this.col * this.tileSize, this.row * this.tileSize, this.tileSize, this.tileSize,
-      this.x * this.tileSize, this.y * this.tileSize, this.tileSize, this.tileSize
+      this.x, this.y, this.tileSize, this.tileSize
     )
   }
 
@@ -59,6 +59,10 @@ export class Stone extends GameObject {
     })
     this.row = 0
     this.col = 1
+
+    this.handlers = new HandlerManager([
+      new GravityHandler({maxGravity: 1}),
+    ])
   }
 }
 
@@ -115,12 +119,13 @@ export class Player extends AnimatedGameObject {
     })
     this.row = 0
     this.col = 1
-    this.speed = 3 / this.tileSize
+    this.speed = 3
     this.handlers = new HandlerManager([
       new EventHandler(),
       new GravityHandler({ 
-        jumpForce: -10 / this.tileSize,
-        maxGravity: 5 / this.tileSize }),
+        jumpForce: -10,
+        maxGravity: 5,
+        gravityForce: 1 }),
       new CollisionHandler(),
       new AnimationHandler({ framesPerAnimation: 15, numberOfFrames: 3})
     ])

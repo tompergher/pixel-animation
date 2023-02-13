@@ -70,15 +70,15 @@ export function calculatePenetration(tile, other) {
         y = h1.getTop() - h2.getBottom()
     }
 
-    return {x: x / h1.tileSize, y: y / h1.tileSize}
+    return {x: x, y: y}
 
 }
 
 
 class Hitbox {
     constructor(tile) {
-        this.x = tile.x * tile.tileSize
-        this.y = tile.y * tile.tileSize
+        this.x = tile.x
+        this.y = tile.y
         this.tileSize = tile.tileSize
     }
 
