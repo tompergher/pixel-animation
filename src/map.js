@@ -1,9 +1,7 @@
 import { Background, Mushroom, Stone, Tree } from "./game_objects.js"
 
-
 export default class Map {
   constructor(mapFile) {
-    this.tiles = []
     this._readMapFile(mapFile)
   }
 
@@ -16,16 +14,10 @@ export default class Map {
 
     // Die Hintergrundkachel wird immer hinzugefügt!!! Andere Kacheln können dann
     // darauf plaziert werden.
-    this.tiles.push( new Background(x, y) )
-    if ( tileType === "s" ) { this.tiles.push( new Stone(x, y)) }
-    if ( tileType === "t" ) { this.tiles.push( new Tree(x, y)) }
-    if ( tileType === "p" ) { this.tiles.push( new Mushroom(x, y)) }
-  }
-
-  drawMap(ctx) {
-    for (let i = 0; i < this.tiles.length; i++) {
-      this.tiles[i].draw(ctx)
-    }
+    new Background(x, y)
+    if ( tileType === "s" ) { new Stone(x, y) }
+    if ( tileType === "t" ) { new Tree(x, y) }
+    if ( tileType === "p" ) { new Mushroom(x, y) }
   }
 
   _readMapFile(filename) {

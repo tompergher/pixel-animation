@@ -1,6 +1,5 @@
-import EventHandler from "./event_handler.js"
+import EventHandler, {AnimationHandler, CollisionHandler, GravityHandler, HandlerManager} from "./event_handler.js"
 import Game, { TileRegistry } from "./game.js"
-import {calculatePenetration} from "./collision_detector.js"
 import { findAndRemoveFromList } from "./utils.js"
 
 export class GameObject extends EventTarget {
@@ -100,23 +99,11 @@ class AnimatedGameObject extends GameObject {
   update() {
     this.x = this.x + this.dx
     this.y = this.y + this.dy
-
-    // Only run the animation if the object moved
-    if (this.dx != 0 || this.dy != 0) {
-      this.frameCounter++
-      if (this.frameCounter >= 15) {
-        this.col++
-        if (this.col >= 2) {
-          this.col = 0
-        }
-        this.frameCounter = 0
-      }
-    }
-
     this.dx = 0
     this.dy = 0
   }
 }
+
 
 export class Player extends AnimatedGameObject {
   constructor(x, y) {
@@ -129,46 +116,27 @@ export class Player extends AnimatedGameObject {
     this.row = 0
     this.col = 1
     this.speed = 3 / this.tileSize
-    this.eventHandler = new EventHandler()
-    this.gravity = 0
-    this.max_gravity = 0//5 / this.tileSize
+    this.handlers = new HandlerManager([
+      new EventHandler(),
+      new GravityHandler({ 
+        jumpForce: -10 / this.tileSize,
+        maxGravity: 5 / this.tileSize }),
+      new CollisionHandler(),
+      new AnimationHandler({ framesPerAnimation: 15, numberOfFrames: 3})
+    ])
 
     this.addEventListener('collision', (e) => {
-      this.handleCollision(e.detail)
+      this.handlers.get(CollisionHandler)._handleEvents(this, {other: e.detail})
     })
   }
 
-  handleCollision(collidingObject) {
-    if (collidingObject.collisionTags.includes("world") 
-      || collidingObject.collisionTags.includes("forest")) {
-      const pen = calculatePenetration(this, collidingObject)
-      if (Math.abs(pen.x) <= Math.abs(pen.y) ) {
-        this.x = this.x - pen.x
-      } else {
-        this.y = this.y - pen.y
-        if ( this.gravity >= 0) {
-          this.isStanding = true
-        }
-        this.gravity = 0
-      }
-    }
-    if (collidingObject.collisionTags.includes("pickups")) {
-      collidingObject.destroy()
-    }
-  }
-
   jump() {
-    if (this.isStanding ) {
-      this.gravity = -16 / this.tileSize
-      this.isStanding = false
-    }
+    this.handlers.get(GravityHandler).jump(this)
   }
 
   update() {
     super.update()
-    this.y = this.y + this.gravity
-    this.gravity = Math.min(this.gravity + 0.02, this.max_gravity)
-    this.eventHandler._handleEvents(this)
+    this.handlers.runAll(this)
   }
 
   handle(ev) {
