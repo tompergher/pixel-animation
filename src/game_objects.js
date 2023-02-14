@@ -3,9 +3,18 @@ import { findAndRemoveFromList } from "./utils.js"
 import TileRegistry from "./tile_registry.js"
 import CollisionDetector from "./collision_detector.js"
 
-export class GameObject extends EventTarget {
+
+/**
+ * Dies ist die Basisklasse für alle Spiel-Objekte.
+ * 
+ * Wenn ein spezialisiertes Spiel-Objekt erzeugt wird, dann soll es 
+ * immer diese Klasse erweitern. Wenn die Funktionen von der Basisklasse
+ * überschrieben werden, sollten diese immer zuerst mit `super.function()` 
+ * aufgerufen werden, so das die eigentliche Funktionalität der Spiel-Objekte
+ * erhalten bleibt.
+ */
+export class GameObject {
   constructor(x, y, options = {sheet, layer: "background", collisionTags: []}) {
-    super()
     this.sheet = options.sheet
     this.tileSize = 32
     this.x = x * this.tileSize
@@ -21,6 +30,11 @@ export class GameObject extends EventTarget {
     })
   }
 
+  /**
+   * Zeichnet das Spiel-Objekt auf das Canvas. Das Spiel-Objekt
+   * kennt dabei seine Position und welches Bild gezeichnet werden soll.
+   * @param {CanvasRenderingContext2D} ctx Das Canvas, worauf das Spiel-Objekt gezeichnet werden soll.
+   */
   draw(ctx) {
     ctx.drawImage(
       this.sheet,
@@ -29,6 +43,9 @@ export class GameObject extends EventTarget {
     )
   }
 
+  /**
+   * Zerstört das Spiel-Objekt und entfernt es aus dem Spiel.
+   */
   destroy() {
     findAndRemoveFromList(TileRegistry.layers[this.layer], this)
     this.collisionTags.forEach(tag => {
@@ -36,6 +53,14 @@ export class GameObject extends EventTarget {
     })
   }
 
+  /**
+   * Berechne die Position und andere Eigenschaften des 
+   * Spiel-Objekts neu. Wie das gemacht wird, wird in den 
+   * verschieden Handlers angegeben. Ein Spiel-Objekt kann
+   * z.B. einen Gravitations-Handler haben, dieser fügt dann
+   * Gravitation für dieses Spiel-Objekt hinzu und berechnet die 
+   * y-Position des Spiel-Objekts neu.
+   */
   update(){
     this.handlers && this.handlers.runAll(this)
   }
