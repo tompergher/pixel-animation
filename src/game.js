@@ -4,6 +4,10 @@ import Camera from "./camera.js"
 import TileRegistry from "./tile_registry.js"
 
 
+/**
+ * Diese Klasse enthält die globalen Variablen für das Spiel,
+ * sowie das GameLoop, welches das Spiel zeichnen soll.
+ */
 export default class Game {
 
   static map = new Map("maps/map.txt")
@@ -18,8 +22,40 @@ export default class Game {
     this.ctx.imageSmoothingEnabled = false
 
     this.camera = new Camera(this)
+
+    this.running = false
   }
 
+  /**
+   * Startet das Spiel.
+   * 
+   * Das Spiel wird gestartet indem die Animationsschleife
+   * des Spiels aufgerufen wird.
+   */
+  start() {
+    this.running = true
+    window.requestAnimationFrame(this.gameLoop.bind(this))
+  }
+
+  /**
+   * Pausiert das Spiel.
+   * 
+   * Die Animationsschleife des Spiels wird unterbrochen,
+   * dadurch wird das Spiel pausiert.
+   * 
+   * Um das Spiel weiterlaufen zu lassen, muss die Methode 
+   * `start()` aufgerufen werden.
+   */
+  pause() {
+    this.running = false
+  }
+
+  /**
+   * Berechnet jeweils das nächste Frame für das Spiel.
+   * Die Positionen der Spiel-Objekte werden neu berechnet,
+   * die Kamera wird korrekt ausgerichtet und die 
+   * Spiel-Objekte werden neu gezeichnet.
+   */
   gameLoop() {
     
     this.camera.clearScreen()
@@ -31,5 +67,9 @@ export default class Game {
     this.camera.centerObject(Game.player)
 
     TileRegistry.drawAllTiles(this.ctx)
+
+    if (this.running = true) {
+      window.requestAnimationFrame(this.gameLoop.bind(this))
+    }
   }
 }
