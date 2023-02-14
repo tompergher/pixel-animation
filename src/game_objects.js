@@ -1,6 +1,7 @@
 import EventHandler, {AnimationHandler, CollisionHandler, GravityHandler, HandlerManager} from "./event_handler.js"
-import Game, { TileRegistry } from "./game.js"
 import { findAndRemoveFromList } from "./utils.js"
+import TileRegistry from "./tile_registry.js"
+import CollisionDetector from "./collision_detector.js"
 
 export class GameObject extends EventTarget {
   constructor(x, y, options = {sheet, layer: "background", collisionTags: []}) {
@@ -16,7 +17,7 @@ export class GameObject extends EventTarget {
     TileRegistry.layers[this.layer].push(this)
     this.collisionTags = options.collisionTags
     this.collisionTags.forEach(tag => {
-      Game.CD.layers[tag].push(this)
+      CollisionDetector.layers[tag].push(this)
     })
   }
 
@@ -31,7 +32,7 @@ export class GameObject extends EventTarget {
   destroy() {
     findAndRemoveFromList(TileRegistry.layers[this.layer], this)
     this.collisionTags.forEach(tag => {
-      findAndRemoveFromList(Game.CD.layers[tag], this)
+      findAndRemoveFromList(CollisionDetector.layers[tag], this)
     })
   }
 
