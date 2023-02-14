@@ -1,5 +1,7 @@
+/**
+ * Hilfsklasse um alle Kacheln in einem Spiel zu verwalten.
+ */
 export default class TileRegistry {
-  static instance = null
   static layers = {
       background: [],
       item: [],
@@ -7,18 +9,10 @@ export default class TileRegistry {
       world: [],
     }
 
-  static getInstance() {
-    if (TileRegistry.instance == null) {
-      TileRegistry.instance = TileRegistry.createInstance()
-    }
-    return TileRegistry.instance
-  }
-
-  static createInstance() {
-    let object = new TileRegistry()
-    return object
-  }
-
+  /**
+   * Zeichne alle Kacheln die in dem Spiel sind auf das Canvas.
+   * @param {CanvasRenderingContext2D} ctx Das Canvas, worauf alle Kacheln gezeichnet werden.
+   */
   static drawAllTiles(ctx) {
     Object.entries(TileRegistry.layers).forEach(([_, layer]) => {
       layer.forEach(tile => {
@@ -27,6 +21,10 @@ export default class TileRegistry {
     })
   }
 
+  /**
+   * Rufe die Update-Funktion auf allen Kacheln auf um die
+   * Positionen der Kacheln berechnen zu lassen.
+   */
   static updateAllTiles() {
     Object.entries(TileRegistry.layers).forEach(([_, layer]) => {
       layer.forEach(tile => {
