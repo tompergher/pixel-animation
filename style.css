@@ -8,6 +8,7 @@ body {
 canvas {
     background-color: white;
     height: 80vh;
+    width: 85vw;
 }
 
 h1 {
