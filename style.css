@@ -2,7 +2,7 @@ body {
     padding: 0;
     margin: 0;
     text-align: center;
-    background-color: #d11197;
+    background-color: black;
 }
 
 canvas {
@@ -12,7 +12,7 @@ canvas {
 }
 
 h1 {
-    color: white;
+    color: #d11197;
     font-size: 2em;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
