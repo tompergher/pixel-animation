@@ -10,7 +10,7 @@ export default class Game {
   static map = new Map("maps/map.txt")
 
   constructor() {
-    this.tileSize = 32
+    this.tileSize = 64
     this.canvas = document.querySelector("#canvas")
     this.canvas.width = 24 * this.tileSize
     this.canvas.height = 11 * this.tileSize
