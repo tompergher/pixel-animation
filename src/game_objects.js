@@ -167,7 +167,7 @@ export class Player extends AnimatedGameObject {
     this.handlers = new HandlerManager([
       new EventHandler(),
       new GravityHandler({ 
-        jumpForce: -10,
+        jumpForce: -11,
         maxGravity: 5,
         gravityForce: 1 }),
       new CollisionHandler(),
