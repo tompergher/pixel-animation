@@ -184,10 +184,8 @@ export class Player extends AnimatedGameObject {
   }
 
   handle(ev) {
-    if (ev === "KeyW") { this.move("up") }
-    if (ev === "KeyS") { this.move("down") }
-    if (ev === "KeyA") { this.move("left") }
-    if (ev === "KeyD") { this.move("right") }
+    if (ev === "KeyA" || ev === "ArrowLeft") { this.move("left") }
+    if (ev === "KeyD" || ev === "ArrowRight") { this.move("right") }
     if (ev === "Space") { this.jump() }
   }
 
