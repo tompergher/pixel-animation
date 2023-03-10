@@ -26,7 +26,13 @@ export class GravityHandler {
     if (gameObject.isStanding) {
       this.gravity = this.jumpForce
       gameObject.isStanding = false
+      gameObject.isJumping = true
+    } else if (gameObject.isJumping && this.gravity > 0) {
+      this.gravity = this.jumpForce
+      gameObject.isStanding = false
+      gameObject.isJumping = false
     }
+
   }
 
   _handleEvents(gameObject) {
