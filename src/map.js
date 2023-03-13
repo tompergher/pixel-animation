@@ -1,5 +1,5 @@
 import Game from "./game.js"
-import { Background, FallingStone, Mushroom, Player, Stone, Tree } from "./game_objects.js"
+import {Player, Backstein, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg  } from "./game_objects.js"
 
 /**
  * Diese Klasse liest eine Kartendatei und erstellt die Spiel-Objekte
@@ -17,11 +17,17 @@ export default class Map {
    * @param {string} tileType Der Buchstabe an der Stelle in der Karte.
    */
   addTilesToMap(x, y, tileType) {
-    new Background(x, y)
-    if ( tileType === "s" ) { new Stone(x, y) }
-    if ( tileType === "S" ) { new FallingStone(x, y) }
-    if ( tileType === "t" ) { new Tree(x, y) }
-    if ( tileType === "p" ) { new Mushroom(x, y) }
+    //new Background(x, y)
+
+    if ( tileType === "a" ) { new Backstein(x, y) }
+    if ( tileType === "b" ) { new Pflasterbeige1reg(x, y) }
+    if ( tileType === "c" ) { new Pflastergrau1unreg(x, y) }
+    if ( tileType === "d" ) { new Pflastergrau2reg(x, y) }
+    if ( tileType === "e" ) { new Pflasterbeige2unreg(x, y) }
+    if ( tileType === "f" ) { new Sand(x, y) }
+    if ( tileType === "g" ) { new Plattenbeige(x, y) }
+    if ( tileType === "h" ) { new Macha(x, y) }
+    if ( tileType === "i" ) { new Dirtweg(x, y) }
     if ( tileType === "P" ) { Game.player = new Player(x, y)}
   }
 

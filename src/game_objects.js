@@ -16,7 +16,7 @@ import CollisionDetector from "./collision_detector.js"
 export class GameObject {
   constructor(x, y, options = {sheet, layer: "background", collisionTags: []}) {
     this.sheet = options.sheet
-    this.tileSize = 32
+    this.tileSize = 64
     this.x = x * this.tileSize
     this.y = y * this.tileSize
     this.col = 0
@@ -82,7 +82,20 @@ export class Background extends GameObject {
   }
 }
 
-export class Stone extends GameObject {
+export class Backstein extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#ground")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 1
+    this.col = 1
+  }
+}
+
+export class Pflasterbeige1reg extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")
     super(x, y, {
@@ -91,22 +104,100 @@ export class Stone extends GameObject {
       collisionTags: ["world"]
     })
     this.row = 0
-    this.col = 1
+    this.col = 2
   }
 }
 
-export class FallingStone extends Stone {
+export class Macha extends GameObject {
   constructor(x, y) {
-    super(x, y)
-    this.handlers = new HandlerManager([
-      new GravityHandler({
-        maxGravity: 3,
-        gravityForce: 1
-      }),
-      new CollisionHandler()
-    ])
+    const ground = document.querySelector("#ground")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 2
+    this.col = 4
   }
-  
+}
+
+
+export class Dirtweg extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#ground")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 0
+    this.col = 3
+  }
+}
+
+export class Pflastergrau1unreg extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#ground")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 1
+    this.col = 3
+  }
+}
+
+export class Pflastergrau2reg extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#ground")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 2
+    this.col = 0
+  }
+}
+
+export class Pflasterbeige2unreg extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#ground")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 1
+    this.col = 0
+  }
+}
+
+export class Sand extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#ground")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 1
+    this.col = 2
+  }
+}
+
+export class Plattenbeige extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#ground")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 2
+    this.col = 2
+  }
 }
 
 export class Tree extends GameObject {
@@ -161,6 +252,7 @@ export class Player extends AnimatedGameObject {
       layer: "player",
       collisionTags: ["world", "pickups"]
     })
+    this.tileSize = 32
     this.row = 0
     this.col = 1
     this.speed = 3
