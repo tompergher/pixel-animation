@@ -252,19 +252,27 @@ export class Player extends AnimatedGameObject {
       layer: "player",
       collisionTags: ["world", "pickups"]
     })
-    this.tileSize = 32
+    this.tileSize = 128
     this.row = 0
     this.col = 1
     this.speed = 3
     this.handlers = new HandlerManager([
       new EventHandler(),
       new GravityHandler({ 
-        jumpForce: -11,
-        maxGravity: 5,
+        jumpForce: -17,
+        maxGravity: 13,
         gravityForce: 1 }),
       new CollisionHandler(),
-      new AnimationHandler({ framesPerAnimation: 15, numberOfFrames: 3})
+      new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 3})
     ])
+  }
+
+  draw(ctx) {
+    ctx.drawImage(
+      this.sheet,
+      this.col * this.tileSize, this.row * this.tileSize, this.tileSize, this.tileSize,
+      this.x, this.y, this.tileSize, this.tileSize
+    )
   }
 
   jump() {
@@ -289,11 +297,11 @@ export class Player extends AnimatedGameObject {
       this.dy = this.dy + (1) * this.speed
       this.row = 0
     } else if (direction === "left") {
-      this.dx = this.dx + (-1) * this.speed
+      this.dx = this.dx + (-1.5) * this.speed
       this.row = 1
     } else if (direction === "right") {
-      this.dx = this.dx + (1) * this.speed
-      this.row = 2
+      this.dx = this.dx + (1.5) * this.speed
+      this.row = 0
     }
   }
 }
