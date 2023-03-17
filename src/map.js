@@ -29,6 +29,7 @@ export default class Map {
     if ( tileType === "h" ) { new Macha(x, y) }
     if ( tileType === "i" ) { new Dirtweg(x, y) }
     if ( tileType === "P" ) { Game.player = new Player(x, y)}
+    if ( tileType === "Q" ) { Game.player2 = new Player(x, y)}
   }
 
   /**

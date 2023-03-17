@@ -1,8 +1,8 @@
-import EventHandler, {AnimationHandler, CollisionHandler, GravityHandler, HandlerManager} from "./event_handler.js"
+import {AnimationHandler, CollisionHandler, GravityHandler, HandlerManager} from "./event_handler.js"
 import { findAndRemoveFromList } from "./utils.js"
 import TileRegistry from "./tile_registry.js"
 import CollisionDetector from "./collision_detector.js"
-
+import Camera from "./camera.js"
 
 /**
  * Dies ist die Basisklasse für alle Spiel-Objekte.
@@ -250,14 +250,13 @@ export class Player extends AnimatedGameObject {
     super(x, y, {
       sheet: img,
       layer: "player",
-      collisionTags: ["world", "pickups"]
+      collisionTags: ["world", "pickups", "cave", "forest"]
     })
     this.tileSize = 128
     this.row = 0
     this.col = 1
     this.speed = 3
     this.handlers = new HandlerManager([
-      new EventHandler(),
       new GravityHandler({ 
         jumpForce: -17,
         maxGravity: 13,
@@ -283,12 +282,6 @@ export class Player extends AnimatedGameObject {
     super.update()
   }
 
-  handle(ev) {
-    if (ev === "KeyA" || ev === "ArrowLeft") { this.move("left") }
-    if (ev === "KeyD" || ev === "ArrowRight") { this.move("right") }
-    if (ev === "Space" || ev === "ArrowUp" || ev === "KeyW") { this.jump() }
-  }
-
   move(direction) {
     if (direction === "up") {
       this.dy = this.dy + (-1) * this.speed
@@ -299,9 +292,11 @@ export class Player extends AnimatedGameObject {
     } else if (direction === "left") {
       this.dx = this.dx + (-1.5) * this.speed
       this.row = 1
+      Camera.shiftBackground(1)
     } else if (direction === "right") {
       this.dx = this.dx + (1.5) * this.speed
       this.row = 0
+      Camera.shiftBackground(-1)
     }
   }
 }
