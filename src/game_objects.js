@@ -262,7 +262,7 @@ export class Player extends AnimatedGameObject {
         maxGravity: 13,
         gravityForce: 1 }),
       new CollisionHandler(),
-      new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 3})
+      new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 4})
     ])
   }
 
