@@ -90,6 +90,7 @@ export default class Game {
 
     TileRegistry.updateAllTiles()
     CollisionDetector.checkCollision("all")
+    if (Game.player !== null){
 
     if (Game.player) {
       
@@ -98,7 +99,7 @@ export default class Game {
         this.camera.centerObject(Game.player)}
       }
 
-
+    }
     
 
     TileRegistry.drawAllTiles(this.ctx)

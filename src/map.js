@@ -8,6 +8,12 @@ import {Player, Backstein, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2r
 export default class Map {
   constructor(mapFile) {
     this._readMapFile(mapFile)
+    const canvas = document.querySelector("#canvas")
+    if ( mapFile === "maps/map.mexico.txt") {
+      canvas.style.backgroundImage = "url('res/GlobalJumperBackground.png')"
+    } else if ( mapFile === "maps/map-02.txt") {
+      canvas.style.backgroundImage = "url('res/GlobalJumperBackground.png')"
+    }
   }
 
   /**
