@@ -95,6 +95,7 @@ export class Backstein extends GameObject {
   }
 }
 
+
 export class Pflasterbeige1reg extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")

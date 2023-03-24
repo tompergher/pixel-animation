@@ -11,8 +11,8 @@ export default class Map {
     const canvas = document.querySelector("#canvas")
     if ( mapFile === "maps/map.mexico.txt") {
       canvas.style.backgroundImage = "url('res/GlobalJumperBackground.png')"
-    } else if ( mapFile === "maps/map-02.txt") {
-      canvas.style.backgroundImage = "url('res/GlobalJumperBackground.png')"
+    } else if ( mapFile === "maps/map.france.txt") {
+      canvas.style.backgroundImage = "url('res/Frankreich.png')"
     }
   }
 
