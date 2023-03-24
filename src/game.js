@@ -91,10 +91,13 @@ export default class Game {
     TileRegistry.updateAllTiles()
     CollisionDetector.checkCollision("all")
 
-    console.log(Game.player.x, Game.player.y)
-    if (Game.player.x > 780) {
-    this.camera.centerObject(Game.player)}
-    else {this.camera.centerObject}
+    if (Game.player) {
+      
+      console.log(Game.player.x, Game.player.y)
+      if (Game.player.x > 780) {
+        this.camera.centerObject(Game.player)}
+      }
+
 
     
 
