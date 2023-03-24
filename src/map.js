@@ -14,6 +14,9 @@ export default class Map {
     } else if ( mapFile === "maps/map.france.txt") {
       canvas.style.backgroundImage = "url('res/Frankreich.png')"
     }
+    else if ( mapFile === "maps/map.egypt.txt") {
+    canvas.style.backgroundImage = "url('res/spiel format.png')"
+  }
   }
 
   /**
