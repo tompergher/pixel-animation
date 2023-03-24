@@ -6,7 +6,7 @@ body {
 }
 
 canvas {
-    background-color: white;
+    background-image: url("res/GlobalJumperBackground.png");
     height: 80vh;
     width: 85vw;
 }
