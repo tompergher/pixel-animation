@@ -1,5 +1,5 @@
 import Game from "./game.js"
-import {Player, Backstein, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg  } from "./game_objects.js"
+import {Player, Backstein, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg, desertrose,coin,totenkopf,vase, hirschstab,mumie } from "./game_objects.js"
 
 /**
  * Diese Klasse liest eine Kartendatei und erstellt die Spiel-Objekte
@@ -39,6 +39,12 @@ export default class Map {
     if ( tileType === "g" ) { new Plattenbeige(x, y) }
     if ( tileType === "h" ) { new Macha(x, y) }
     if ( tileType === "i" ) { new Dirtweg(x, y) }
+    if ( tileType === "r" ) { new desertrose(x, y) }
+    if ( tileType === "C" ) { new coin(x, y) }
+    if ( tileType === "t" ) { new totenkopf(x, y) }
+    if ( tileType === "m" ) { new mumie(x, y) }
+    if ( tileType === "H" ) { new hirschstab(x, y) }
+    if ( tileType === "v" ) { new vase(x, y) }
     if ( tileType === "P" ) { Game.player = new Player(x, y)}
     if ( tileType === "Q" ) { Game.player2 = new Player(x, y)}
   }

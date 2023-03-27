@@ -67,6 +67,88 @@ export class GameObject {
 
 
 }
+export class coin extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#EgyptObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 0
+    this.col = 2
+  }
+}
+export class totenkopf extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#EgyptObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 0
+    this.col = 1
+  }
+}
+export class mumie extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#EgyptObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 1
+    this.col = 0
+  }
+}
+export class hirschstab extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#EgyptObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 1
+    this.col = 1
+  }
+}
+export class vase extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#EgyptObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 1
+    this.col = 2
+  }
+}
+
+
+export class desertrose extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#EgyptObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 0
+    this.col = 0
+  }
+}
+
+
 
 export class Background extends GameObject {
   constructor(x, y) {
