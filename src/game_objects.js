@@ -68,6 +68,77 @@ export class GameObject {
 
 }
 
+export class Sakura extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+    this.row = 0
+    this.col = 0
+  }
+}
+
+export class Bonsai extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 0
+    this.col = 1
+  }
+}
+
+
+
+export class Sushi extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+    this.row = 1
+    this.col = 0
+  }
+}
+
+export class Katana extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 0
+    this.col = 1
+  }
+}
+
+export class Origami extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 0
+    this.col = 2
+  }
+}
+
+
+
+
+
 export class Background extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")
@@ -300,4 +371,54 @@ export class Player extends AnimatedGameObject {
       Camera.shiftBackground(-1)
     }
   }
+}
+
+export class Boss extends AnimatedGameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.tileSize = 128
+    this.row = 0
+    this.col = 2
+    this.speed = 2
+    this.handlers = new HandlerManager([
+      new CollisionHandler(),
+      new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 1})
+    ])
+  }
+
+  update() {
+    super.update()
+    if (this.x - Game.player.x < 640) {
+    followPlayer()
+    }
+  }
+  
+  followPlayer()  {
+    if (Game.player.x < this.x) {
+    this.move("left")}
+
+    if (Game.player.x > this.x) {
+      this.move("right")
+    }
+}
+  move(direction) {
+   if (direction === "left") {
+      this.dx = this.dx + (-1) * this.speed
+      this.row = 1
+      Camera.shiftBackground(1)
+    } else if (direction === "right") {
+      this.dx = this.dx + (1) * this.speed
+      this.row = 0
+      Camera.shiftBackground(-1)
+    }
+  }
+
+
+
+
 }

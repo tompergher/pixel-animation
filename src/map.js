@@ -1,5 +1,5 @@
 import Game from "./game.js"
-import {Player, Backstein, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg  } from "./game_objects.js"
+import {Player, Backstein, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg, Sakura, Bonsai, Boss, Sushi, Katana, Origami  } from "./game_objects.js"
 
 /**
  * Diese Klasse liest eine Kartendatei und erstellt die Spiel-Objekte
@@ -39,6 +39,12 @@ export default class Map {
     if ( tileType === "g" ) { new Plattenbeige(x, y) }
     if ( tileType === "h" ) { new Macha(x, y) }
     if ( tileType === "i" ) { new Dirtweg(x, y) }
+    if ( tileType === "s" ) { new Sakura(x, y) }
+    if ( tileType === "n" ) { new Bonsai(x, y) }
+    if ( tileType === "x" ) { new Boss(x, y) }
+    if ( tileType === "y" ) { new Sushi(x, y) }
+    if ( tileType === "z" ) { new Katana(x, y) }
+    if ( tileType === "o" ) { new Origami(x, y) }
     if ( tileType === "P" ) { Game.player = new Player(x, y)}
     if ( tileType === "Q" ) { Game.player2 = new Player(x, y)}
   }
