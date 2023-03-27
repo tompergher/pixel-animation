@@ -13,7 +13,12 @@ export default class Map {
       canvas.style.backgroundImage = "url('res/GlobalJumperBackground.png')"
     } else if ( mapFile === "maps/map.france.txt") {
       canvas.style.backgroundImage = "url('res/Frankreich.png')"
+    } else if ( mapFile === "maps/map.Japan.txt") {
+      canvas.style.backgroundImage = "url('res/Japan Background.png')"
     }
+    else if ( mapFile === "maps/map.egypt.txt") {
+    canvas.style.backgroundImage = "url('res/spiel format.png')"
+  }
   }
 
   /**
