@@ -23,7 +23,7 @@ tttt.ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 ......t...
 ......bf..
 .ff...tt..
-.f......S.
+.f......s.
 ........b.
 ......Q.b.
 ...ss.....

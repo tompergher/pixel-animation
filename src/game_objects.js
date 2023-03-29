@@ -1,7 +1,7 @@
 import {AnimationHandler, CollisionHandler, GravityHandler, HandlerManager} from "./event_handler.js"
 import { findAndRemoveFromList } from "./utils.js"
 import TileRegistry from "./tile_registry.js"
-import CollisionDetector from "./collision_detector.js"
+import CollisionDetector, { addCollisionEntry} from "./collision_detector.js"
 import Camera from "./camera.js"
 import Game from "./game.js"
 import Map from "./map.js"
@@ -71,11 +71,16 @@ export class GameObject {
   update(){
     this.handlers && this.handlers.runAll(this)
     if (this.collisionTags.length > 0){
-      const index = (this.x / this.tileSize) + (this.y / this.tileSize) * Map.width
-      if (CollisionDetector.xRay[index] && CollisionDetector.xRay[index].length > 0) {
-        CollisionDetector.xRay[index].push(this)
-      } else {
-        CollisionDetector.xRay[index] = [this]
+      let index = parseInt(this.x / this.tileSize) + parseInt(this.y / this.tileSize) * (Map.width + 1)
+      addCollisionEntry(index, this)
+      if (this.x % this.tileSize !== 0) {
+        addCollisionEntry(index + 1, this)
+      }
+      if (this.y % this.tileSize !== 0) {
+        addCollisionEntry(index + Map.width + 1, this)
+      }
+      if (this.x % this.tileSize !== 0 && this.y % this.tileSize !== 0) {
+        addCollisionEntry(index + 1 + Map.width + 1, this)
       }
     }
   }

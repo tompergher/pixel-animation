@@ -1,5 +1,14 @@
 import { CollisionHandler } from "./event_handler.js";
 
+
+export function addCollisionEntry(index, thisObject) {
+  if (CollisionDetector.xRay[index] && CollisionDetector.xRay[index].length > 0) {
+    CollisionDetector.xRay[index].push(thisObject)
+  } else {
+    CollisionDetector.xRay[index] = [thisObject]
+  }
+}
+
 /**
  * Diese Klasse beinhaltet Funktionen die verwendet werden um
  * Kollisionen zwischen Kacheln zu erkennen.
@@ -38,37 +47,27 @@ export default class CollisionDetector {
      * Wir "all" als layerName verwendet, werden Kollisionen auf allen 
      * Layern geprüft.
      */
-    static checkCollision(layerName){
-        const possibleCollisions = Object.entries(CollisionDetector.xRay).filter(([key, value]) => {
+    static checkCollision(){
+        const possibleCollisions = Object.values(CollisionDetector.xRay).filter((value) => {
             return value.length > 1
         })
-        console.log(possibleCollisions)
-    }
-
-    /**
-     * Erkennt eine Kollision auf einem Layer.
-     * Wird eine Kollision erkannt, wir das GameObject welches eine 
-     * Kollision hat benachrichtigt. Diesem GameObjekt wird dabei mitgeteilt
-     * mit welchem anderen Objekt es zusammen eine Kollision hat.
-     * Gibt es eine Kollision, wird `false` zurückgegeben.
-     */
-    static detectCollisionsInLayer(currentLayer){
-        currentLayer.forEach(tile => {
-            const h1 = new Hitbox(tile);
-            currentLayer.forEach(other => {
-                if (tile === other) {
-                    return false
-                } else {
-                    const h2 = new Hitbox(other);
-                    const collision = CollisionDetector.hitboxOverlapping(h1, h2);
-                    if (collision && tile.handlers.get(CollisionHandler)) {
-                        tile.handlers.get(CollisionHandler)._handleEvents(tile, {other: other})
+        Object.values(possibleCollisions).forEach((value) => {
+            value.forEach(tile => {
+                value.forEach(other => {
+                    if (tile === other) {
+                        return false
+                    } else {
+                        const h1 = new Hitbox(tile);
+                        const h2 = new Hitbox(other);
+                        const collision = CollisionDetector.hitboxOverlapping(h1, h2);
+                        if (collision && tile.handlers.get(CollisionHandler)) {
+                            tile.handlers.get(CollisionHandler)._handleEvents(tile, {other: other})
+                        }
                     }
-                }
+                })
             })
         })
     }
-
     /**
      * Prüft ob die Hitboxes von 2 Objekten eine Überschneidung haben.
      * @returns {boolean} Wenn die Hitboxes eine Überschneidung haben, wird `true` zurückgegeben. Ansonsten `false`.

@@ -20,8 +20,8 @@ export default class Game {
   static tileSize = 32
 
   constructor() {
-    Game.canvas.width = 10 * this.tileSize
-    Game.canvas.height = 15 * this.tileSize
+    Game.canvas.width = 10 * Game.tileSize
+    Game.canvas.height = 15 * Game.tileSize
     this.ctx = Game.canvas.getContext("2d")
     this.ctx.imageSmoothingEnabled = false
 
@@ -83,7 +83,7 @@ export default class Game {
     EventHandler.handleAllEvents()
 
     TileRegistry.updateAllTiles()
-    CollisionDetector.checkCollision("all")
+    CollisionDetector.checkCollision()
 
     this.camera.centerObject(Game.player)
 
