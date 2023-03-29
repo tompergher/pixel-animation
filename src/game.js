@@ -16,13 +16,13 @@ export default class Game {
   static player2 = null;
   static running = false;
   static currentFrame = 0;
+  static canvas = document.querySelector("#canvas")
+  static tileSize = 32
 
   constructor() {
-    this.tileSize = 32
-    this.canvas = document.querySelector("#canvas")
-    this.canvas.width = 10 * this.tileSize
-    this.canvas.height = 15 * this.tileSize
-    this.ctx = this.canvas.getContext("2d")
+    Game.canvas.width = 10 * Game.tileSize
+    Game.canvas.height = 15 * Game.tileSize
+    this.ctx = Game.canvas.getContext("2d")
     this.ctx.imageSmoothingEnabled = false
 
     new EventHandler()
@@ -76,13 +76,14 @@ export default class Game {
 
     Game.currentFrame++
     
+    CollisionDetector.clearXRay()
     this.camera.clearScreen()
     this.camera.nextFrame()
 
     EventHandler.handleAllEvents()
 
     TileRegistry.updateAllTiles()
-    CollisionDetector.checkCollision("all")
+    CollisionDetector.checkCollision()
 
     this.camera.centerObject(Game.player)
 

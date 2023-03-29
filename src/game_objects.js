@@ -1,8 +1,10 @@
 import {AnimationHandler, CollisionHandler, GravityHandler, HandlerManager} from "./event_handler.js"
 import { findAndRemoveFromList } from "./utils.js"
 import TileRegistry from "./tile_registry.js"
-import CollisionDetector from "./collision_detector.js"
+import CollisionDetector, { addCollisionEntry} from "./collision_detector.js"
 import Camera from "./camera.js"
+import Game from "./game.js"
+import Map from "./map.js"
 
 /**
  * Dies ist die Basisklasse für alle Spiel-Objekte.
@@ -36,11 +38,16 @@ export class GameObject {
    * @param {CanvasRenderingContext2D} ctx Das Canvas, worauf das Spiel-Objekt gezeichnet werden soll.
    */
   draw(ctx) {
+    // console.log(Game.canvas.width, Game.canvas.height, this.x, this.y)
+    const transform = ctx.getTransform()
+    // console.log(transform.e, transform.f)
+    if (this.x > -(transform.e + this.tileSize) && this.y > -(transform.f + this.tileSize) && this.x < Game.canvas.width - transform.e && this.y < Game.canvas.height - transform.f) {
     ctx.drawImage(
       this.sheet,
       this.col * this.tileSize, this.row * this.tileSize, this.tileSize, this.tileSize,
       this.x, this.y, this.tileSize, this.tileSize
     )
+    }
   }
 
   /**
@@ -63,9 +70,20 @@ export class GameObject {
    */
   update(){
     this.handlers && this.handlers.runAll(this)
+    if (this.collisionTags.length > 0){
+      let index = parseInt(this.x / this.tileSize) + parseInt(this.y / this.tileSize) * (Map.width + 1)
+      addCollisionEntry(index, this)
+      if (this.x % this.tileSize !== 0) {
+        addCollisionEntry(index + 1, this)
+      }
+      if (this.y % this.tileSize !== 0) {
+        addCollisionEntry(index + Map.width + 1, this)
+      }
+      if (this.x % this.tileSize !== 0 && this.y % this.tileSize !== 0) {
+        addCollisionEntry(index + 1 + Map.width + 1, this)
+      }
+    }
   }
-
-
 }
 
 export class Background extends GameObject {
