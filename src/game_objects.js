@@ -41,7 +41,7 @@ export class GameObject {
     // console.log(Game.canvas.width, Game.canvas.height, this.x, this.y)
     const transform = ctx.getTransform()
     // console.log(transform.e, transform.f)
-    if (this.x > -(transform.e + this.tileSize) && this.y > -(transform.f - this.tileSize) && this.x < Game.canvas.width - transform.e && this.y < Game.canvas.height - transform.f) {
+    if (this.x > -(transform.e + this.tileSize) && this.y > -(transform.f + this.tileSize) && this.x < Game.canvas.width - transform.e && this.y < Game.canvas.height - transform.f) {
     ctx.drawImage(
       this.sheet,
       this.col * this.tileSize, this.row * this.tileSize, this.tileSize, this.tileSize,
