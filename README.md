@@ -7,6 +7,14 @@ Das Spiel kann [hier](https://cedricgeissmann.github.io/pixel-animation) direkt 
 
 # Changes
 
+## v1.8
+
+Schnelleres erkennen von Kollisionen. Es können nun viele Spielobjekte platziert werden, ohne dass das Spiel sehr langsam wird.
+
+## v1.7
+
+Es gibt einen Hintergrund, den man auf dem Spielfeld setzen kann. Der Hintergrund verschiebt sich mit dem Spieler.
+
 ## v1.6
 
 Es ist nun möglich mit mehreren Spielern zu spielen.
