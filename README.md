@@ -7,6 +7,10 @@ Das Spiel kann [hier](https://cedricgeissmann.github.io/pixel-animation) direkt 
 
 # Changes
 
+## v1.10
+
+- Das Spiel kann nun pausiert werden, und wieder gestartet.
+
 ## v1.9
 
 - Handler für SpielObjekte sind intuitiver und können einfach zu Objekten hinzugefügt werden.
