@@ -1,4 +1,5 @@
 import Game from "./game.js"
+import { ShootingStone } from "./game_objects.js"
 
 const config = {
   "keys": {
@@ -10,6 +11,7 @@ const config = {
     "ArrowLeft": function() { Game.player2.move("left")},
     "ArrowDown": function() { Game.player2.move("down")},
     "ArrowRight": function() { Game.player2.move("right")},
+    "Space": function() { new ShootingStone(Game.player.x / Game.tileSize, Game.player.y / Game.tileSize)},
   }
 }
 
