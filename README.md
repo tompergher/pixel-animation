@@ -7,6 +7,10 @@ Das Spiel kann [hier](https://cedricgeissmann.github.io/pixel-animation) direkt 
 
 # Changes
 
+## v1.11
+
+- Es kann nun ein Cooldown bei Aktionen die in `config.js` definiert werden, hinzugefügt werden.
+
 ## v1.10
 
 - Das Spiel kann nun pausiert werden, und wieder gestartet.
