@@ -11,7 +11,10 @@ const config = {
     "ArrowLeft": function() { Game.player2.move("left")},
     "ArrowDown": function() { Game.player2.move("down")},
     "ArrowRight": function() { Game.player2.move("right")},
-    "Space": function() { new ShootingStone(Game.player.x / Game.tileSize, Game.player.y / Game.tileSize)},
+    "Space": {
+      callback: function() { new ShootingStone(Game.player.x / Game.tileSize, Game.player.y / Game.tileSize)},
+      cooldown: 60 // Add cooldown in frames
+    }
   }
 }
 

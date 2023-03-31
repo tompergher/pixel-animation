@@ -30,15 +30,20 @@ export default class InputHandler {
     window.onkeydown = (ev) => {InputHandler.events.add(ev.code)}
     window.onkeyup = (ev) => {InputHandler.events.delete(ev.code)}
     Object.entries(config["keys"]).forEach(([key, callback]) => {
-      new Command(key, callback)
+      if (typeof callback === "function") {
+        new Command(key, callback)
+      } else if (typeof callback === "object") {
+        new Command(key, callback.callback, callback.cooldown)
+      }
     })
   }
 
   static handleAllEvents() {
     InputHandler.events.forEach((ev) => {
       InputHandler.commands.forEach(command => {
-        if (command.key === ev) {
+        if (command.key === ev && command.ready()) {
           command.callback()
+          command.calledOnFrame = Game.currentFrame
         }
       })
     })
@@ -48,10 +53,16 @@ export default class InputHandler {
 
 
 class Command {
-  constructor(key, callback) {
+  constructor(key, callback, cooldown = 0) {
     this.key = key
     this.callback = callback
+    this.cooldown = cooldown
+    this.calledOnFrame = 0
     InputHandler.commands.push(this)
+  }
+
+  ready() {
+    return Game.currentFrame - this.calledOnFrame >= this.cooldown
   }
 }
 
