@@ -199,7 +199,7 @@ export class Katana extends GameObject {
       layer: "world",
       collisionTags: ["world"]
     })
-    this.row = 0
+    this.row = 1
     this.col = 1
   }
 }
@@ -210,16 +210,50 @@ export class Origami extends GameObject {
     super(x, y, {
       sheet: ground,
       layer: "world",
-      collisionTags: ["world"]
+      collisionTags: ["damage"]
     })
-    this.row = 0
+    this.row = 1
     this.col = 2
+    this.leftRemaining = 20
+    this.speed = 10
+    this.rightRemaining = 0
   }
+
+  update() {
+    super.update()
+    if (this.leftRemaining > 0) {
+      this.goLefti()
+    }
+  if (this.rightRemaining > 0) {
+    this.goRighti()
+  } 
+ 
+
 }
 
 
 
 
+goLefti() {
+  this.x = this.x - this.speed
+  this.leftRemaining--
+  if (this.leftRemaining <=0) {
+  this.rightRemaining = 20
+  }
+  
+}
+
+
+goRighti() {
+  this.x = this.x + this.speed
+  this.rightRemaining--
+  if (this.rightRemaining <=0) {
+  this.leftRemaining = 20
+  }
+  
+}   
+
+}
 
 export class Background extends GameObject {
   constructor(x, y) {
@@ -404,7 +438,7 @@ export class Player extends AnimatedGameObject {
     super(x, y, {
       sheet: img,
       layer: "player",
-      collisionTags: ["world", "pickups", "cave", "forest"]
+      collisionTags: ["world", "pickups", "cave", "forest", "damage"]
     })
     this.tileSize = 128
     this.row = 0

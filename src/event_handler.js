@@ -126,6 +126,10 @@ export class CollisionHandler {
     if (collidingObject.collisionTags.includes("cave")) {
       Game.loadMap("maps/map-02.txt")
     }
+
+    if (collidingObject.collisionTags.includes("damage")) {
+      Game.loseLife(5)
+    }
   }
 }
 
