@@ -1,5 +1,5 @@
 import Game from "./game.js"
-import {Player, Backstein, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg, Sakura, Bonsai, Boss, Sushi, Katana, Origami  } from "./game_objects.js"
+import {Player, Backstein, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg, Sakura, Bonsai, Boss, Sushi, Katana, Origami, desertrose, coin, totenkopf, vase, hirschstab, mumie  } from "./game_objects.js"
 
 /**
  * Diese Klasse liest eine Kartendatei und erstellt die Spiel-Objekte
@@ -17,7 +17,7 @@ export default class Map {
       canvas.style.backgroundImage = "url('res/Japan Background.png')"
     }
     else if ( mapFile === "maps/map.egypt.txt") {
-    canvas.style.backgroundImage = "url('res/spiel format.png')"
+    canvas.style.backgroundImage = "url('res/Background Egypt.png')"
   }
   }
 
@@ -45,6 +45,12 @@ export default class Map {
     if ( tileType === "y" ) { new Sushi(x, y) }
     if ( tileType === "z" ) { new Katana(x, y) }
     if ( tileType === "o" ) { new Origami(x, y) }
+    if ( tileType === "r" ) { new desertrose(x, y) }
+    if ( tileType === "C" ) { new coin(x, y) }
+    if ( tileType === "t" ) { new totenkopf(x, y) }
+    if ( tileType === "m" ) { new mumie(x, y) }
+    if ( tileType === "H" ) { new hirschstab(x, y) }
+    if ( tileType === "v" ) { new vase(x, y) }
     if ( tileType === "P" ) { Game.player = new Player(x, y)}
     if ( tileType === "Q" ) { Game.player2 = new Player(x, y)}
   }
