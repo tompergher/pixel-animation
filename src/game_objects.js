@@ -67,6 +67,88 @@ export class GameObject {
 
 
 }
+
+
+
+export class Kaktus extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#MexicoObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["damage"]
+    })
+
+    this.row = 1
+    this.col = 2
+  }
+}
+
+
+export class Chilli extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#MexicoObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 1
+    this.col = 1
+  }
+}
+
+
+export class Avocado extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#MexicoObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 0
+    this.col = 1
+  }
+}
+
+export class Nachos extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#MexicoObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 0
+    this.col = 2
+  }
+}
+
+
+export class Taco extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#MexicoObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 1
+    this.col = 0
+  }
+}
+
+
+
+
+
+
+
 export class coin extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#EgyptObject")
