@@ -68,7 +68,19 @@ export class GameObject {
 
 }
 
+export class Dia_de_los_Muertos extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#MexicoObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["damage"]
+    })
 
+    this.row = 0
+    this.col = 0
+  }
+}
 
 export class Kaktus extends GameObject {
   constructor(x, y) {
