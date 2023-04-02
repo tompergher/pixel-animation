@@ -56,6 +56,20 @@ export default class Game {
     }
   }
 
+  static loseLifeOnce() {
+    console.log("loseLife")
+    const lifeElement = document.querySelector("#life")
+    let lifeCounter = parseInt(lifeElement.textContent)
+    lifeElement.textContent = lifeCounter - 1
+  }
+
+  static gainLifeOnce() {
+    console.log("gainLife")
+    const lifeElement = document.querySelector("#life")
+    let lifeCounter = parseInt(lifeElement.textContent)
+    lifeElement.textContent = lifeCounter + 1
+  }
+
   /**
    * Pausiert das Spiel.
    * 
