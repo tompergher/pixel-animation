@@ -122,13 +122,11 @@ export class CollisionHandler {
     if (collidingObject.collisionTags.includes("pickups")) {
       collidingObject.destroy()
       if (collidingObject instanceof Chilli) {
-        Game.loseLifeOnce()
-      }
-      if (collidingObject instanceof Avocado) {
-        Game.gainLifeOnce()
+        Game.loseLife1()
       }
       
     }
+
 
     if (collidingObject.collisionTags.includes("cave")) {
       Game.loadMap("maps/map-02.txt")
