@@ -1,5 +1,5 @@
 import {addAnimation, addCollision, addGravity, addProjectile, CollisionHandler, GravityHandler, HandlerManager} from "./event_handler.js"
-import { findAndRemoveFromList } from "./utils.js"
+import { findAndRemoveFromList, pixelToWorld } from "./utils.js"
 import TileRegistry from "./tile_registry.js"
 import { addCollisionEntry} from "./collision_detector.js"
 import Camera from "./camera.js"
@@ -67,15 +67,16 @@ export class GameObject {
     const colHandler = this.handlers.get(CollisionHandler)
     if (colHandler == null) return
     if (colHandler.collisionTags.length > 0){
-      let index = parseInt(this.x / 32) + parseInt(this.y / 32) * (Map.width + 1)
+      const coords = pixelToWorld(this.x, this.y)
+      let index = coords.x + coords.y * (Map.width + 1)
       addCollisionEntry(index, this)
-      if (this.x % 32 !== 0) {
+      if (coords.overflowX) {
         addCollisionEntry(index + 1, this)
       }
-      if (this.y % 32 !== 0) {
+      if (coords.overflowY) {
         addCollisionEntry(index + Map.width + 1, this)
       }
-      if (this.x % 32 !== 0 && this.y % 32 !== 0) {
+      if (coords.overflowX && coords.overflowY) {
         addCollisionEntry(index + 1 + Map.width + 1, this)
       }
     }
