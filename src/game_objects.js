@@ -67,17 +67,23 @@ export class GameObject {
     const colHandler = this.handlers.get(CollisionHandler)
     if (colHandler == null) return
     if (colHandler.collisionTags.length > 0){
-      const coords = pixelToWorld(this.x, this.y)
-      let index = coords.x + coords.y * (Map.width + 1)
-      addCollisionEntry(index, this)
-      if (coords.overflowX) {
-        addCollisionEntry(index + 1, this)
-      }
-      if (coords.overflowY) {
-        addCollisionEntry(index + Map.width + 1, this)
-      }
-      if (coords.overflowX && coords.overflowY) {
-        addCollisionEntry(index + 1 + Map.width + 1, this)
+      for (let xOffset = 0; xOffset < this.tileWidth / Game.tileWidth; xOffset++) {
+        for (let yOffset = 0; yOffset < this.tileHeight / Game.tileHeight; yOffset++) {
+          const coords = pixelToWorld(this.x, this.y)
+          coords.x += xOffset
+          coords.y += yOffset
+          let index = coords.x + coords.y * (Map.width + 1)
+          addCollisionEntry(index, this)
+          if (coords.overflowX) {
+            addCollisionEntry(index + 1, this)
+          }
+          if (coords.overflowY) {
+            addCollisionEntry(index + Map.width + 1, this)
+          }
+          if (coords.overflowX && coords.overflowY) {
+            addCollisionEntry(index + 1 + Map.width + 1, this)
+          }
+        }
       }
     }
   }
@@ -200,7 +206,7 @@ export class Player extends AnimatedGameObject {
       sheet: img,
       layer: "player",
     })
-    this.tileWidth = 64
+    this.tileWidth = 32
     this.tileHeight = 32
     this.row = 0 * this.tileHeight
     this.col = 1 * this.tileWidth
