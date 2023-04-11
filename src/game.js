@@ -28,7 +28,7 @@ export default class Game {
 
     new EventHandler()
 
-    Game.loadMap("maps/map.France.txt")
+    Game.loadMap("maps/map.france.txt")
 
     this.camera = new Camera(this)
 
