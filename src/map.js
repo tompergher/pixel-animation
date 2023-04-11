@@ -44,7 +44,11 @@ export default class Map {
     if ( tileType === "x" ) { new Boss(x, y) }
     if ( tileType === "y" ) { new Sushi(x, y) }
     if ( tileType === "z" ) { new Katana(x, y) }
-    if ( tileType === "o" ) { new Origami(x, y) }
+    if ( tileType === "o" ) { new Origami(x, y,) }
+    
+    
+    
+    
     if ( tileType === "r" ) { new desertrose(x, y) }
     if ( tileType === "C" ) { new coin(x, y) }
     if ( tileType === "t" ) { new totenkopf(x, y) }

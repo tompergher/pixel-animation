@@ -214,8 +214,8 @@ export class Origami extends GameObject {
     })
     this.row = 1
     this.col = 2
-    this.leftRemaining = 20
-    this.speed = 10
+    this.leftRemaining = 650
+    this.speed = 5
     this.rightRemaining = 0
   }
 
@@ -234,11 +234,12 @@ export class Origami extends GameObject {
 
 
 
+
 goLefti() {
   this.x = this.x - this.speed
   this.leftRemaining--
   if (this.leftRemaining <=0) {
-  this.rightRemaining = 20
+  this.rightRemaining = 650
   }
   
 }
@@ -248,12 +249,14 @@ goRighti() {
   this.x = this.x + this.speed
   this.rightRemaining--
   if (this.rightRemaining <=0) {
-  this.leftRemaining = 20
+  this.leftRemaining = 650
   }
   
-}   
+  
+}   }
 
-}
+   
+
 
 export class Background extends GameObject {
   constructor(x, y) {
