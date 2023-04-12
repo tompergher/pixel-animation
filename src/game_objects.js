@@ -494,34 +494,34 @@ export class Player extends AnimatedGameObject {
 
 export class Boss extends AnimatedGameObject {
   constructor(x, y) {
-    const ground = document.querySelector("#JapanObjekte")
+    const ground = document.querySelector("#Samurai")
     super(x, y, {
       sheet: ground,
       layer: "world",
       collisionTags: ["world"]
     })
-    this.tileSize = 128
+    this.tileSize = 64
     this.row = 0
-    this.col = 2
+    this.col = 0
     this.speed = 2
     this.handlers = new HandlerManager([
       new CollisionHandler(),
-      new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 1})
+      new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 5})
     ])
   }
 
   update() {
     super.update()
-    if (this.x - Game.player.x < 640) {
+    if (this.x - Player.x < 640) {
     followPlayer()
     }
   }
   
   followPlayer()  {
-    if (Game.player.x < this.x) {
+    if (Player.x < this.x) {
     this.move("left")}
 
-    if (Game.player.x > this.x) {
+    if (Player.x > this.x) {
       this.move("right")
     }
 }
