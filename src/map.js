@@ -1,12 +1,18 @@
 import Game from "./game.js"
 import {Player, Backstein, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg  } from "./game_objects.js"
+import { Background, Mushroom, Player, Stone, Tree, Wall, Cave } from "./game_objects.js"
 
 /**
  * Diese Klasse liest eine Kartendatei und erstellt die Spiel-Objekte
  * an den Stellen die in der Karte angegeben sind.
  */
 export default class Map {
+  static width = 0
+  static height = 0
+
   constructor(mapFile) {
+    Map.width = 0
+    Map.height = 0
     this._readMapFile(mapFile)
     const canvas = document.querySelector("#canvas")
     if ( mapFile === "maps/map.mexico.txt") {
@@ -39,6 +45,11 @@ export default class Map {
     if ( tileType === "g" ) { new Plattenbeige(x, y) }
     if ( tileType === "h" ) { new Macha(x, y) }
     if ( tileType === "i" ) { new Dirtweg(x, y) }
+    if ( tileType === "s" ) { new Stone(x, y) }
+    if ( tileType === "t" ) { new Tree(x, y) }
+    if ( tileType === "p" ) { new Mushroom(x, y) }
+    if ( tileType === "w" ) { new Wall(x, y) }
+    if ( tileType === "h" ) { new Cave(x, y) }
     if ( tileType === "P" ) { Game.player = new Player(x, y)}
     if ( tileType === "Q" ) { Game.player2 = new Player(x, y)}
   }
@@ -55,6 +66,8 @@ export default class Map {
           let row = rows[y].split("")
           for (let x = 0; x < row.length; x++) {
             this.addTilesToMap(x, y, row[x])
+            Map.width = Math.max(Map.width, x)
+            Map.height = Math.max(Map.height, y)
           }
         }
       })
