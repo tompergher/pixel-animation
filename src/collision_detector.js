@@ -19,6 +19,8 @@ export default class CollisionDetector {
 
     }
 
+
+
     static clear() {
       CollisionDetector.layers = {
         world: [],

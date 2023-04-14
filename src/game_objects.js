@@ -88,7 +88,7 @@ export class Kaktus extends GameObject {
     super(x, y, {
       sheet: ground,
       layer: "world",
-      collisionTags: ["damage"]
+      collisionTags: ["world"]
     })
 
     this.row = 1
