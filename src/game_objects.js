@@ -391,6 +391,19 @@ export class Backstein extends GameObject {
   }
 }
 
+export class Ice extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#ground")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["forest"]
+    })
+    this.row = 0
+    this.col = 1
+  }
+}
+
 
 export class Pflasterbeige1reg extends GameObject {
   constructor(x, y) {
@@ -547,7 +560,7 @@ export class Player extends AnimatedGameObject {
     super(x, y, {
       sheet: img,
       layer: "player",
-      collisionTags: ["world", "pickups", "cave", "forest", "damage"]
+      collisionTags: ["world", "pickups", "cave", "damage"]
     })
     this.tileSize = 128
     this.row = 0
