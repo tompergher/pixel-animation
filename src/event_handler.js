@@ -1,5 +1,5 @@
 import { calculatePenetration } from "./collision_detector.js"
-import { Avocado, Chilli, Dia_de_los_Muertos, Kaktus, Player } from "./game_objects.js"
+import { Avocado, Chilli, Dia_de_los_Muertos, Kaktus, Nachos, Player, Taco } from "./game_objects.js"
 import Game from "./game.js"
 import config from "./config.js"
 
@@ -128,6 +128,12 @@ export class CollisionHandler {
         Game.loseLife()
       }
       if (collidingObject instanceof Avocado){
+        Game.winLife()
+      }
+      if (collidingObject instanceof Taco){
+        Game.winLife()
+      }
+      if (collidingObject instanceof Nachos){
         Game.winLife()
       }
     }
