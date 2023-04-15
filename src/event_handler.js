@@ -1,5 +1,5 @@
 import { calculatePenetration } from "./collision_detector.js"
-import { Avocado, Player } from "./game_objects.js"
+import { Avocado, Chilli, Player } from "./game_objects.js"
 import Game from "./game.js"
 import config from "./config.js"
 
@@ -120,7 +120,11 @@ export class CollisionHandler {
 
     // Wenn das kollidierende Objekt aus Pickups ist, wird es entfernt.
     if (collidingObject.collisionTags.includes("pickups")) {
-      collidingObject.destroy()}
+      collidingObject.destroy()
+      if (collidingObject instanceof Chilli){
+        Game.loseLife()
+      }
+    }
     
 
 
