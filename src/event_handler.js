@@ -127,6 +127,9 @@ export class CollisionHandler {
       if (collidingObject instanceof Dia_de_los_Muertos){
         Game.loseLife()
       }
+      if (collidingObject instanceof Avocado){
+        Game.winLife()
+      }
     }
     
     if (collidingObject instanceof Kaktus){
