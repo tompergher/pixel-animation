@@ -156,6 +156,21 @@ export class Taco extends GameObject {
 }
 
 
+export class Stone extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#objectsGeneral")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 0
+    this.col = 1
+  }
+}
+
+
 
 
 
