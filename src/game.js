@@ -61,15 +61,8 @@ export default class Game {
     const lifeElement = document.querySelector("#life")
     let lifeCounter = parseInt(lifeElement.textContent)
     lifeElement.textContent = lifeCounter + 1
-    
-  }
 
-  //static loseLife() {
-   // console.log("loseLife")
-    //const lifeElement = document.querySelector("#life")
-    //let lifeCounter = parseInt(lifeElement.textContent)
-    //lifeElement.textContent = lifeCounter - 1
-  //}
+  }
 
 
   /**

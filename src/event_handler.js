@@ -1,5 +1,5 @@
 import { calculatePenetration } from "./collision_detector.js"
-import { Avocado, Chilli, Dia_de_los_Muertos, Kaktus, Nachos, Player, Taco } from "./game_objects.js"
+import { Avocado, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Taco, Wasser } from "./game_objects.js"
 import Game from "./game.js"
 import config from "./config.js"
 
@@ -142,9 +142,19 @@ export class CollisionHandler {
       Game.loseLife()
     }
 
+    if (collidingObject instanceof Lava){
+      if (Game.currentFrame - Game.lastTimeDamage >= 0.1) {
+        Game.loseLife() }
+    }
+
+    if (collidingObject instanceof Wasser){
+      if (Game.currentFrame - Game.lastTimeDamage >= 0.1) {
+        Game.loseLife() }
+    }
+
 
     if (collidingObject.collisionTags.includes("cave")) {
-      Game.loadMap("maps/map-02.txt")
+      Game.loadMap("maps/map.france.txt")
     }
 
     if (collidingObject.collisionTags.includes("damage")) {

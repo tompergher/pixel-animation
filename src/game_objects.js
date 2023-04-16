@@ -391,6 +391,32 @@ export class Backstein extends GameObject {
   }
 }
 
+export class Lava extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#groundNr2")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 0
+    this.col = 0
+  }
+}
+
+export class Wasser extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#groundNr2")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["damage"]
+    })
+    this.row = 1
+    this.col = 2
+  }
+}
+
 export class Ice extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")
@@ -535,6 +561,21 @@ export class Mushroom extends GameObject {
     this.col = 2
   }
 }
+
+export class cave extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#objectsGeneral")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["cave"]
+    })
+    this.row = 1
+    this.col = 2
+  }
+}
+
+
 
 class AnimatedGameObject extends GameObject {
   constructor(x, y, options) {

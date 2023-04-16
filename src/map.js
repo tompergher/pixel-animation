@@ -1,5 +1,5 @@
 import Game from "./game.js"
-import {Player, Backstein, Ice, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg, Sakura, Bonsai, Boss, Sushi, Katana, Origami, desertrose, coin, totenkopf, vase, hirschstab, mumie, Kaktus, Chilli, Nachos, Avocado, Dia_de_los_Muertos, Taco, Stone   } from "./game_objects.js"
+import {Player, Backstein, Ice, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg, Sakura, Bonsai, Boss, Sushi, Katana, Origami, desertrose, coin, totenkopf, vase, hirschstab, mumie, Kaktus, Chilli, Nachos, Avocado, Dia_de_los_Muertos, Taco, Stone, cave, Lava, Wasser   } from "./game_objects.js"
 
 /**
  * Diese Klasse liest eine Kartendatei und erstellt die Spiel-Objekte
@@ -59,6 +59,9 @@ export default class Map {
     if ( tileType === "A" ) { new Avocado(x, y) }
     if ( tileType === "D" ) { new Dia_de_los_Muertos(x, y) }
     if ( tileType === "S" ) { new Stone(x, y) }
+    if ( tileType === "X" ) { new cave(x, y) }
+    if ( tileType === "L" ) { new Lava(x, y) }
+    if ( tileType === "W" ) { new Wasser(x, y) }
     if ( tileType === "P" ) { Game.player = new Player(x, y)}
     if ( tileType === "Q" ) { Game.player2 = new Player(x, y)}
   }
