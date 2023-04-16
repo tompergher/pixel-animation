@@ -73,8 +73,8 @@ export class Dia_de_los_Muertos extends GameObject {
     const ground = document.querySelector("#MexicoObject")
     super(x, y, {
       sheet: ground,
-      layer: "world",
-      collisionTags: ["damage"]
+      layer: "item",
+      collisionTags: ["pickups"]
     })
 
     this.row = 0
@@ -410,7 +410,7 @@ export class Wasser extends GameObject {
     super(x, y, {
       sheet: ground,
       layer: "world",
-      collisionTags: ["damage"]
+      collisionTags: ["world"]
     })
     this.row = 1
     this.col = 2
@@ -597,7 +597,7 @@ class AnimatedGameObject extends GameObject {
 
 export class Player extends AnimatedGameObject {
   constructor(x, y) {
-    const img = document.querySelector("#character")
+    const img = document.querySelector("#characterMexico")
     super(x, y, {
       sheet: img,
       layer: "player",

@@ -64,6 +64,11 @@ export default class Game {
 
   }
 
+  static reduceLifeby3() {
+    const lifeElement = document.querySelector("#life")
+    let lifeCounter = parseInt(lifeElement.textContent)
+    lifeElement.textContent = lifeCounter - 3
+  }
 
   /**
    * Pausiert das Spiel.
