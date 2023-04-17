@@ -143,11 +143,11 @@ export class CollisionHandler {
     }
 
     if (collidingObject instanceof Lava){
-      Game.reduceLifeby3()
+      Game.gameover()
     }
 
     if (collidingObject instanceof Wasser){
-      Game.reduceLifeby3()
+      Game.gameover()
     }
 
 

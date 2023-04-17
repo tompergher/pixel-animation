@@ -65,8 +65,15 @@ export default class Game {
 
   static gameover(){
     alert("Game Over")
-    
+    //reset lifeCounter to 3
+    const lifeElement = document.querySelector("#life")
+    let lifeCounter = parseInt(lifeElement.textContent)
+    lifeElement.textContent = lifeCounter = lifeCounter + 3
+
+
     Game.loadMap(Game.map.currentMapFile)
+    
+
   }
  
 
@@ -81,7 +88,7 @@ export default class Game {
       const lifeElement = document.querySelector("#life")
       let lifeCounter = parseInt(lifeElement.textContent)
       lifeElement.textContent = lifeCounter - 1
-      if (lifeCounter <= 0) {
+      if (lifeCounter <= 1) {
         Game.gameover()
         
       }
@@ -101,6 +108,7 @@ export default class Game {
     let lifeCounter = parseInt(lifeElement.textContent)
     lifeElement.textContent = lifeCounter - 3
   }
+
 
   /**
    * Pausiert das Spiel.
