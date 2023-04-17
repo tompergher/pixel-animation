@@ -92,6 +92,7 @@ export class GameObject {
   }
 }
 
+
 export class Background extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#ground")
