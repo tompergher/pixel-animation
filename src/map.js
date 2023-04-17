@@ -1,6 +1,5 @@
 import Game from "./game.js"
-import {Player, Backstein, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg  } from "./game_objects.js"
-import { Background, Mushroom, Player, Stone, Tree, Wall, Cave } from "./game_objects.js"
+import {Player, Backstein, Ice, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg, Sakura, Bonsai, Boss, Sushi, Katana, Origami, desertrose, coin, totenkopf, vase, hirschstab, mumie, Kaktus, Chilli, Nachos, Avocado, Dia_de_los_Muertos, Taco, Stone, cave, Lava, Wasser   } from "./game_objects.js"
 
 /**
  * Diese Klasse liest eine Kartendatei und erstellt die Spiel-Objekte
@@ -23,7 +22,7 @@ export default class Map {
       canvas.style.backgroundImage = "url('res/Japan Background.png')"
     }
     else if ( mapFile === "maps/map.egypt.txt") {
-    canvas.style.backgroundImage = "url('res/spiel format.png')"
+    canvas.style.backgroundImage = "url('res/Background Egypt.png')"
   }
   }
 
@@ -37,6 +36,7 @@ export default class Map {
     //new Background(x, y)
 
     if ( tileType === "a" ) { new Backstein(x, y) }
+    if ( tileType === "I" ) { new Ice(x, y) }
     if ( tileType === "b" ) { new Pflasterbeige1reg(x, y) }
     if ( tileType === "c" ) { new Pflastergrau1unreg(x, y) }
     if ( tileType === "d" ) { new Pflastergrau2reg(x, y) }
@@ -50,6 +50,28 @@ export default class Map {
     if ( tileType === "p" ) { new Mushroom(x, y) }
     if ( tileType === "w" ) { new Wall(x, y) }
     if ( tileType === "h" ) { new Cave(x, y) }
+    if ( tileType === "s" ) { new Sakura(x, y) }
+    if ( tileType === "n" ) { new Bonsai(x, y) }
+    if ( tileType === "x" ) { new Boss(x, y) }
+    if ( tileType === "y" ) { new Sushi(x, y) }
+    if ( tileType === "z" ) { new Katana(x, y) }
+    if ( tileType === "o" ) { new Origami(x, y) }
+    if ( tileType === "r" ) { new desertrose(x, y) }
+    if ( tileType === "C" ) { new coin(x, y) }
+    if ( tileType === "t" ) { new totenkopf(x, y) }
+    if ( tileType === "m" ) { new mumie(x, y) }
+    if ( tileType === "H" ) { new hirschstab(x, y) }
+    if ( tileType === "v" ) { new vase(x, y) }
+    if ( tileType === "k" ) { new Kaktus(x, y) }
+    if ( tileType === "j" ) { new Chilli(x, y) }
+    if ( tileType === "l" ) { new Taco(x, y) }
+    if ( tileType === "p" ) { new Nachos(x, y) }
+    if ( tileType === "A" ) { new Avocado(x, y) }
+    if ( tileType === "D" ) { new Dia_de_los_Muertos(x, y) }
+    if ( tileType === "S" ) { new Stone(x, y) }
+    if ( tileType === "X" ) { new cave(x, y) }
+    if ( tileType === "L" ) { new Lava(x, y) }
+    if ( tileType === "W" ) { new Wasser(x, y) }
     if ( tileType === "P" ) { Game.player = new Player(x, y)}
     if ( tileType === "Q" ) { Game.player2 = new Player(x, y)}
   }

@@ -24,6 +24,7 @@ export default class CollisionDetector {
         forest: [],
         pickups: [],
         cave: [],
+        damage: [],
 
     }
 
@@ -32,12 +33,14 @@ export default class CollisionDetector {
         CollisionDetector.xRay = {}
     }
 
+
     static clear() {
       CollisionDetector.layers = {
         world: [],
         forest: [],
         pickups: [],
         cave: [],
+        damage: [],
       }
     }
 

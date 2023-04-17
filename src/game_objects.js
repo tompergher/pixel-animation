@@ -92,6 +92,301 @@ export class GameObject {
   }
 }
 
+export class Dia_de_los_Muertos extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#MexicoObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["damage"]
+    })
+
+    this.row = 0
+    this.col = 0
+  }
+}
+
+export class Kaktus extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#MexicoObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 1
+    this.col = 2
+  }
+}
+
+
+export class Chilli extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#MexicoObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 1
+    this.col = 1
+  }
+}
+
+
+export class Avocado extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#MexicoObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 0
+    this.col = 1
+  }
+}
+
+export class Nachos extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#MexicoObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 0
+    this.col = 2
+  }
+}
+
+
+export class Taco extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#MexicoObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 1
+    this.col = 0
+  }
+}
+
+
+export class Stone extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#objectsGeneral")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 0
+    this.col = 1
+  }
+}
+
+
+
+
+
+
+
+export class coin extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#EgyptObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 0
+    this.col = 2
+  }
+}
+export class totenkopf extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#EgyptObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 0
+    this.col = 1
+  }
+}
+export class mumie extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#EgyptObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 1
+    this.col = 0
+  }
+}
+export class hirschstab extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#EgyptObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 1
+    this.col = 1
+  }
+}
+export class vase extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#EgyptObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 1
+    this.col = 2
+  }
+}
+
+
+export class desertrose extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#EgyptObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 0
+    this.col = 0
+  }
+}
+
+
+
+export class Sakura extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+    this.row = 0
+    this.col = 0
+  }
+}
+
+export class Bonsai extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 0
+    this.col = 1
+  }
+}
+
+
+
+export class Sushi extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+    this.row = 1
+    this.col = 0
+  }
+}
+
+export class Katana extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 1
+    this.col = 1
+  }
+}
+
+export class Origami extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["damage"]
+    })
+    this.row = 1
+    this.col = 2
+    this.leftRemaining = 20
+    this.speed = 10
+    this.rightRemaining = 0
+  }
+
+  update() {
+    super.update()
+    if (this.leftRemaining > 0) {
+      this.goLefti()
+    }
+  if (this.rightRemaining > 0) {
+    this.goRighti()
+  } 
+ 
+
+}
+
+
+
+
+goLefti() {
+  this.x = this.x - this.speed
+  this.leftRemaining--
+  if (this.leftRemaining <=0) {
+  this.rightRemaining = 20
+  }
+  
+}
+
+
+goRighti() {
+  this.x = this.x + this.speed
+  this.rightRemaining--
+  if (this.rightRemaining <=0) {
+  this.leftRemaining = 20
+  }
+  
+}   
+
+}
 
 export class Background extends GameObject {
   constructor(x, y) {
@@ -114,6 +409,45 @@ export class Backstein extends GameObject {
       collisionTags: ["world"]
     })
     this.row = 1
+    this.col = 1
+  }
+}
+
+export class Lava extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#groundNr2")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.row = 0
+    this.col = 0
+  }
+}
+
+export class Wasser extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#groundNr2")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["damage"]
+    })
+    this.row = 1
+    this.col = 2
+  }
+}
+
+export class Ice extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#ground")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["forest"]
+    })
+    this.row = 0
     this.col = 1
   }
 }
@@ -268,6 +602,21 @@ export class Mushroom extends GameObject {
   }
 }
 
+export class cave extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#objectsGeneral")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["cave"]
+    })
+    this.row = 1
+    this.col = 2
+  }
+}
+
+
+
 class AnimatedGameObject extends GameObject {
   constructor(x, y, options) {
     super(x, y, options)
@@ -292,6 +641,7 @@ export class Player extends AnimatedGameObject {
     super(x, y, {
       sheet: img,
       layer: "player",
+      collisionTags: ["world", "pickups", "cave", "damage"]
     })
     this.tileSize = 128
     this.row = 0
@@ -355,4 +705,54 @@ export class Player extends AnimatedGameObject {
       Camera.shiftBackground(-1)
     }
   }
+}
+
+export class Boss extends AnimatedGameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+    this.tileSize = 128
+    this.row = 0
+    this.col = 2
+    this.speed = 2
+    this.handlers = new HandlerManager([
+      new CollisionHandler(),
+      new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 1})
+    ])
+  }
+
+  update() {
+    super.update()
+    if (this.x - Game.player.x < 640) {
+    followPlayer()
+    }
+  }
+  
+  followPlayer()  {
+    if (Game.player.x < this.x) {
+    this.move("left")}
+
+    if (Game.player.x > this.x) {
+      this.move("right")
+    }
+}
+  move(direction) {
+   if (direction === "left") {
+      this.dx = this.dx + (-1) * this.speed
+      this.row = 1
+      Camera.shiftBackground(1)
+    } else if (direction === "right") {
+      this.dx = this.dx + (1) * this.speed
+      this.row = 0
+      Camera.shiftBackground(-1)
+    }
+  }
+
+
+
+
 }

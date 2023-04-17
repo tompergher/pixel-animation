@@ -20,6 +20,7 @@ export default class Game {
   static tileWidth = 32
   static tileHeight = 32
   static instance = null
+  static lastTimeDamage = 0;
 
   constructor() {
     this.tileSize = 64
@@ -35,7 +36,7 @@ export default class Game {
 
     new EventHandler()
 
-    Game.loadMap("maps/map.france.txt")
+    Game.loadMap("maps/map.mexico.txt")
 
     this.camera = new Camera(this)
 
@@ -59,11 +60,23 @@ export default class Game {
   }
 
   static loseLife() {
-    console.log("loseLife")
+    if (Game.currentFrame - Game.lastTimeDamage >= 60) {
+      console.log("loseLife")
+      Game.lastTimeDamage = Game.currentFrame
+      const lifeElement = document.querySelector("#life")
+      let lifeCounter = parseInt(lifeElement.textContent)
+      lifeElement.textContent = lifeCounter - 1
+    }
+  }
+
+  static winLife() {
+    console.log("winLife")
     const lifeElement = document.querySelector("#life")
     let lifeCounter = parseInt(lifeElement.textContent)
-    lifeElement.textContent = lifeCounter - 1
+    lifeElement.textContent = lifeCounter + 1
+
   }
+
 
   /**
    * Pausiert das Spiel.

@@ -1,5 +1,5 @@
 import { calculatePenetration } from "./collision_detector.js"
-import { Player } from "./game_objects.js"
+import { Avocado, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Taco, Wasser } from "./game_objects.js"
 import Game from "./game.js"
 import config from "./config.js"
 
@@ -167,6 +167,49 @@ export class CollisionHandler {
     if (matchCollisionTags(collidingObject, ["pickups"])) {
       collidingObject.destroy()
     }
+    // Wenn das kollidierende Objekt aus Pickups ist, wird es entfernt.
+    if (collidingObject.collisionTags.includes("pickups")) {
+      collidingObject.destroy()
+      if (collidingObject instanceof Chilli){
+        Game.loseLife()
+      }
+      if (collidingObject instanceof Dia_de_los_Muertos){
+        Game.loseLife()
+      }
+      if (collidingObject instanceof Avocado){
+        Game.winLife()
+      }
+      if (collidingObject instanceof Taco){
+        Game.winLife()
+      }
+      if (collidingObject instanceof Nachos){
+        Game.winLife()
+      }
+    }
+    
+    if (collidingObject instanceof Kaktus){
+      Game.loseLife()
+    }
+
+    if (collidingObject instanceof Lava){
+      if (Game.currentFrame - Game.lastTimeDamage >= 0.1) {
+        Game.loseLife() }
+    }
+
+    if (collidingObject instanceof Wasser){
+      if (Game.currentFrame - Game.lastTimeDamage >= 0.1) {
+        Game.loseLife() }
+    }
+
+
+    if (collidingObject.collisionTags.includes("cave")) {
+      Game.loadMap("maps/map.france.txt")
+    }
+
+    if (collidingObject.collisionTags.includes("damage")) {
+      Game.loseLife(5)
+    }
+
   }
 }
 
