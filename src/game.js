@@ -27,7 +27,7 @@ export default class Game {
 
     new EventHandler()
 
-    Game.loadMap("maps/map.france.txt")
+    Game.loadMap("maps/map.egypt.txt")
 
     this.camera = new Camera(this)
 
@@ -58,14 +58,14 @@ export default class Game {
    * Die Animationsschleife des Spiels wird unterbrochen,
    * dadurch wird das Spiel pausiert.
    * 
-   * Um das Spiel weiterlaufen zu lassen, muss die Methode 
+   * Um das Spiel weiterlaufen zu lassen, muss die Methode                                                                                      
    * `start()` aufgerufen werden.
    */
   static pause() {
     Game.running = false
   }
 
-  static loadMap(mapfile) {
+  static loadMap(mapfile) { 
       TileRegistry.clear()
       CollisionDetector.clear()
       Game.player = null

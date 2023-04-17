@@ -17,7 +17,7 @@ export default class Map {
       canvas.style.backgroundImage = "url('res/Japan Background.png')"
     }
     else if ( mapFile === "maps/map.egypt.txt") {
-    canvas.style.backgroundImage = "url('res/Background Egypt.png')"
+    canvas.style.backgroundImage = "url('res/egypt verenderig.png')"
   }
   }
 
