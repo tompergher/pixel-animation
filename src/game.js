@@ -30,6 +30,22 @@ export default class Game {
 
     Game.loadMap("maps/map.mexico.txt")
 
+    document.querySelector("#egypt-button").addEventListener("click", () => {
+      Game.loadMap("maps/map.egypt.txt")
+    })
+
+    document.querySelector("#japan-button").addEventListener("click", () => {
+      Game.loadMap("maps/map.Japan.txt")
+    })
+
+    document.querySelector("#france-button").addEventListener("click", () => {
+      Game.loadMap("maps/map.france.txt")
+    })
+
+    document.querySelector("#mexico-button").addEventListener("click", () => {
+      Game.loadMap("maps/map.mexico.txt")
+    })
+
     this.camera = new Camera(this)
 
     Game.running = false
@@ -46,6 +62,18 @@ export default class Game {
     Game.running = true
   }
 
+
+  static gameover(){
+    alert("Game Over")
+    
+    Game.loadMap(Game.map.currentMapFile)
+  }
+ 
+
+
+
+
+
   static loseLife() {
     if (Game.currentFrame - Game.lastTimeDamage >= 60) {
       console.log("loseLife")
@@ -53,6 +81,10 @@ export default class Game {
       const lifeElement = document.querySelector("#life")
       let lifeCounter = parseInt(lifeElement.textContent)
       lifeElement.textContent = lifeCounter - 1
+      if (lifeCounter <= 0) {
+        Game.gameover()
+        
+      }
     }
   }
 

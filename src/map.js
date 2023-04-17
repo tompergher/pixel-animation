@@ -7,6 +7,7 @@ import {Player, Backstein, Ice, Pflasterbeige1reg, Pflastergrau1unreg, Pflasterg
  */
 export default class Map {
   constructor(mapFile) {
+    this.currentMapFile = mapFile
     this._readMapFile(mapFile)
     const canvas = document.querySelector("#canvas")
     if ( mapFile === "maps/map.mexico.txt") {
