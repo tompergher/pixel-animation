@@ -21,7 +21,7 @@ export default class Game {
   constructor() {
     this.tileSize = 64
     this.canvas = document.querySelector("#canvas")
-    this.canvas.width = 24 * this.tileSize
+    this.canvas.width = 26 * this.tileSize
     this.canvas.height = 11 * this.tileSize
     this.ctx = this.canvas.getContext("2d")
     this.ctx.imageSmoothingEnabled = false
@@ -157,7 +157,7 @@ export default class Game {
       if (Game.player.x > 780) {
         this.camera.centerObject(Game.player)
       } else {
-        this.camera.centerCoordinate(780 - 2 * Game.tileSize, 353)
+        this.camera.centerCoordinate(959 - 2 * 64, 353)
       }
 
     }
