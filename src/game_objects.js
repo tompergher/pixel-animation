@@ -323,8 +323,8 @@ export class Origami extends GameObject {
     })
     this.row = 1
     this.col = 2
-    this.leftRemaining = 20
-    this.speed = 10
+    this.leftRemaining = 650
+    this.speed = 5
     this.rightRemaining = 0
   }
 
@@ -343,11 +343,12 @@ export class Origami extends GameObject {
 
 
 
+
 goLefti() {
   this.x = this.x - this.speed
   this.leftRemaining--
   if (this.leftRemaining <=0) {
-  this.rightRemaining = 20
+  this.rightRemaining = 650
   }
   
 }
@@ -357,12 +358,14 @@ goRighti() {
   this.x = this.x + this.speed
   this.rightRemaining--
   if (this.rightRemaining <=0) {
-  this.leftRemaining = 20
+  this.leftRemaining = 650
   }
   
-}   
+  
+}   }
 
-}
+   
+
 
 export class Background extends GameObject {
   constructor(x, y) {
@@ -654,34 +657,34 @@ export class Player extends AnimatedGameObject {
 
 export class Boss extends AnimatedGameObject {
   constructor(x, y) {
-    const ground = document.querySelector("#JapanObjekte")
+    const ground = document.querySelector("#Samurai")
     super(x, y, {
       sheet: ground,
       layer: "world",
       collisionTags: ["world"]
     })
-    this.tileSize = 128
+    this.tileSize = 64
     this.row = 0
-    this.col = 2
+    this.col = 0
     this.speed = 2
     this.handlers = new HandlerManager([
       new CollisionHandler(),
-      new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 1})
+      new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 5})
     ])
   }
 
   update() {
     super.update()
-    if (this.x - Game.player.x < 640) {
+    if (this.x - Player.x < 640) {
     followPlayer()
     }
   }
   
   followPlayer()  {
-    if (Game.player.x < this.x) {
+    if (Player.x < this.x) {
     this.move("left")}
 
-    if (Game.player.x > this.x) {
+    if (Player.x > this.x) {
       this.move("right")
     }
 }

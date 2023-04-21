@@ -16,6 +16,7 @@ export default class Map {
       canvas.style.backgroundImage = "url('res/Frankreich.png')"
     } else if ( mapFile === "maps/map.Japan.txt") {
       canvas.style.backgroundImage = "url('res/Japan Background.png')"
+      document.getElementById("character") === "url('res/Characterdesign Japan.png')"
     }
     else if ( mapFile === "maps/map.egypt.txt") {
     canvas.style.backgroundImage = "url('res/egypt verenderig.png')"
@@ -46,7 +47,11 @@ export default class Map {
     if ( tileType === "x" ) { new Boss(x, y) }
     if ( tileType === "y" ) { new Sushi(x, y) }
     if ( tileType === "z" ) { new Katana(x, y) }
-    if ( tileType === "o" ) { new Origami(x, y) }
+    if ( tileType === "o" ) { new Origami(x, y,) }
+    
+    
+    
+    
     if ( tileType === "r" ) { new desertrose(x, y) }
     if ( tileType === "C" ) { new coin(x, y) }
     if ( tileType === "t" ) { new totenkopf(x, y) }
