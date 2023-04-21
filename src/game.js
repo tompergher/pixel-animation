@@ -71,6 +71,7 @@ export default class Game {
     lifeElement.textContent = lifeCounter = lifeCounter + 3
 
 
+    console.log(Game.map.currentMapFile)
     Game.loadMap(Game.map.currentMapFile)
     
 
@@ -128,6 +129,7 @@ export default class Game {
       CollisionDetector.clear()
       Game.player = null
       Game.map = new Map(mapfile)
+      
 
   }
 
@@ -148,13 +150,14 @@ export default class Game {
 
     TileRegistry.updateAllTiles()
     CollisionDetector.checkCollision("all")
-    if (Game.player !== null){
 
     if (Game.player) {
       
       console.log(Game.player.x, Game.player.y)
       if (Game.player.x > 780) {
-        this.camera.centerObject(Game.player)}
+        this.camera.centerObject(Game.player)
+      } else {
+        this.camera.centerCoordinate(780 - 2 * Game.tileSize, 353)
       }
 
     }
