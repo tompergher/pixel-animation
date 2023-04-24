@@ -129,6 +129,7 @@ export default class Game {
       CollisionDetector.clear()
       Game.player = null
       Game.map = new Map(mapfile)
+      Camera.resetBackground()
       
 
   }
