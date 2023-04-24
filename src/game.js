@@ -3,6 +3,7 @@ import CollisionDetector from "./collision_detector.js"
 import Camera from "./camera.js"
 import TileRegistry from "./tile_registry.js"
 import EventHandler from "./event_handler.js"
+import InputHandler from "./event_handler.js"
 
 
 /**
@@ -68,7 +69,7 @@ export default class Game {
     //reset lifeCounter to 3
     const lifeElement = document.querySelector("#life")
     let lifeCounter = parseInt(lifeElement.textContent)
-    lifeElement.textContent = lifeCounter = lifeCounter + 3
+    lifeElement.textContent = 3
 
 
     console.log(Game.map.currentMapFile)
@@ -132,6 +133,7 @@ export default class Game {
       Camera.resetBackground()
       
 
+      InputHandler.events.clear()
   }
 
   /**
