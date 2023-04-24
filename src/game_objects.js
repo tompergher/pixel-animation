@@ -3,6 +3,7 @@ import { findAndRemoveFromList } from "./utils.js"
 import TileRegistry from "./tile_registry.js"
 import CollisionDetector from "./collision_detector.js"
 import Camera from "./camera.js"
+import Game from "./game.js"
 
 /**
  * Dies ist die Basisklasse für alle Spiel-Objekte.
@@ -600,7 +601,15 @@ class AnimatedGameObject extends GameObject {
 
 export class Player extends AnimatedGameObject {
   constructor(x, y) {
-    const img = document.querySelector("#characterMexico")
+    let img = document.querySelector("#characterMexico")
+    if (Game.map.currentMapFile === "maps/map.Japan.txt") {
+      img = document.querySelector("#characterJapan")
+    } else if (Game.map.currentMapFile === "maps/map.france.txt") {
+      img = document.querySelector("#characterFrance")
+    }
+    else if (Game.map.currentMapFile === "maps/map.egypt.txt") {
+      img = document.querySelector("#characterEgypt")
+    }
     super(x, y, {
       sheet: img,
       layer: "player",
