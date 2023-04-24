@@ -610,6 +610,7 @@ export class Player extends AnimatedGameObject {
     this.row = 0
     this.col = 1
     this.speed = 3
+    this.inWater = false
     this.handlers = new HandlerManager([
       new GravityHandler({ 
         jumpForce: -17,
@@ -618,6 +619,7 @@ export class Player extends AnimatedGameObject {
       new CollisionHandler(),
       new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 4})
     ])
+    
   }
 
   draw(ctx) {

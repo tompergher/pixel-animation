@@ -147,7 +147,10 @@ export class CollisionHandler {
     }
 
     if (collidingObject instanceof Wasser){
-      Game.gameover()
+      if (Game.player && Game.player.inWater === false) {
+        Game.player.inWater = true
+        Game.gameover()
+      }
     }
 
 
