@@ -3,6 +3,7 @@ import CollisionDetector from "./collision_detector.js"
 import Camera from "./camera.js"
 import TileRegistry from "./tile_registry.js"
 import EventHandler from "./event_handler.js"
+import InputHandler from "./event_handler.js"
 
 
 /**
@@ -68,7 +69,7 @@ export default class Game {
     //reset lifeCounter to 3
     const lifeElement = document.querySelector("#life")
     let lifeCounter = parseInt(lifeElement.textContent)
-    lifeElement.textContent = lifeCounter = lifeCounter + 3
+    lifeElement.textContent = 3
 
 
     console.log(Game.map.currentMapFile)
@@ -129,8 +130,10 @@ export default class Game {
       CollisionDetector.clear()
       Game.player = null
       Game.map = new Map(mapfile)
+      Camera.resetBackground()
       
 
+      InputHandler.events.clear()
   }
 
   /**
@@ -157,7 +160,7 @@ export default class Game {
       if (Game.player.x > 780) {
         this.camera.centerObject(Game.player)
       } else {
-        this.camera.centerCoordinate(959 - 2 * 64, 353)
+        this.camera.centerCoordinate(970 - 3 * 64, 350)
       }
 
     }

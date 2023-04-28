@@ -75,5 +75,9 @@ export default class Camera {
       const bgX = parseInt(canvasStyle.backgroundPositionX) || 0
       canvasStyle.backgroundPositionX = `${bgX + value}px`
   }
+  static resetBackground() {
+    const canvasStyle = document.querySelector("#canvas").style
+    canvasStyle.backgroundPositionX = '0px'
+}
     
 }
