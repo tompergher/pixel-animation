@@ -11,7 +11,7 @@ export default class InputHandler {
 
   constructor() {
     // Setup Eventlisteners
-    window.onkeydown = (ev) => {InputHandler.events.add(ev.code)}
+    window.onkeydown = (ev) => {InputHandler.events.add(ev.code); return false}
     window.onkeyup = (ev) => {InputHandler.events.delete(ev.code)}
     Object.entries(config["keys"]).forEach(([key, callback]) => {
       new Command(key, callback)
