@@ -3,6 +3,8 @@ body {
     margin: 0;
     text-align: center;
     background-color: black;
+    position: relative;
+    overflow: hidden;
 }
 
 canvas {
@@ -21,3 +23,52 @@ h1 {
 #life {
     color: white
 }
+
+#overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    
+    top: 0px;
+    bottom: 0px;
+    left: 50px;
+    right: 50px;
+
+    background-color: blueviolet;
+}
+
+
+#overlay > img {
+    width: 300%;
+}
+
+.country:hover {
+    fill: green;
+}
+
+.Japan:hover {
+    fill: green;
+}
+
+
+#map {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    
+    
+
+    background-color: blueviolet;
+}
+
+#start {
+    display: block;
+    visibility: visible;
+    display: block;
+    visibility: visible;
+    background-color: blue; 
+  }
+  
+  

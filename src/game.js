@@ -47,11 +47,40 @@ export default class Game {
       Game.loadMap("maps/map.mexico.txt")
     })
 
+    document.querySelector("#mexico").addEventListener("click", (ev) => {
+      console.log("Mexico")
+      Game.loadMap("maps/map.mexico.txt")
+      document.querySelector("#overlay").style.display = "none"
+    })
+
+    document.querySelector("#france").addEventListener("click", (ev) => {
+      console.log("France")
+      Game.loadMap("maps/map.france.txt")
+      document.querySelector("#overlay").style.display = "none"
+    })
+    
+    document.querySelector("#egypt").addEventListener("click", (ev) => {
+      console.log("Egypt")
+      Game.loadMap("maps/map.egypt.txt")
+      document.querySelector("#overlay").style.display = "none"
+    })
+
+    document.querySelector(".Japan").addEventListener("click", (ev) => {
+      console.log("Japan")
+      Game.loadMap("maps/map.Japan.txt")
+      document.querySelector("#overlay").style.display = "none"
+    })
+
+    
+
     this.camera = new Camera(this)
 
     Game.running = false
     window.requestAnimationFrame(this.gameLoop.bind(this))
   }
+
+
+  
 
   /**
    * Startet das Spiel.
