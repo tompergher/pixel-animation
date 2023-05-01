@@ -71,7 +71,7 @@ export default class Game {
       document.querySelector("#overlay").style.display = "none"
     })
 
-    
+    document.querySelector("#Startbildschirm").style.display = "none"
 
     this.camera = new Camera(this)
 
