@@ -57,10 +57,10 @@ h1 {
     align-items: center;
     justify-content: center;
     position: absolute;
+    scale: 2;
     
     
 
-    background-color: blueviolet;
 }
 
 #start {

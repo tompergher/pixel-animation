@@ -31,6 +31,10 @@ export default class Game {
 
     Game.loadMap("maps/map.mexico.txt")
 
+    document.querySelector("#startbutton").addEventListener("click", () => {
+      StartGame5()
+    })
+
     document.querySelector("#egypt-button").addEventListener("click", () => {
       Game.loadMap("maps/map.egypt.txt")
     })
@@ -71,7 +75,9 @@ export default class Game {
       document.querySelector("#overlay").style.display = "none"
     })
 
-    document.querySelector("#Startbildschirm").style.display = "none"
+    //document.querySelector("#Startbildschirm").style.display = "none"
+
+  
 
     this.camera = new Camera(this)
 
@@ -201,4 +207,11 @@ export default class Game {
       window.requestAnimationFrame(this.gameLoop.bind(this))
     }
   }
+}
+
+function StartGame5() {
+
+  document.querySelector("#Startbildschirm").style.display = "none"
+  document.querySelector("#startbutton").style.display = "none"
+
 }
