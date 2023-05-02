@@ -152,7 +152,8 @@ export class CollisionHandler {
 
 
     if (collidingObject.collisionTags.includes("cave")) {
-      Game.loadMap("maps/map.france.txt")
+      document.querySelector("#overlay").style.display = "flex"
+      //Game.loadMap("maps/map.france.txt")
     }
 
     if (collidingObject.collisionTags.includes("damage")) {
