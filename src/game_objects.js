@@ -301,6 +301,26 @@ export class Sushi extends GameObject {
   }
 }
 
+
+export class SushiShoot extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#JapanObjekte")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["weapon"]
+    })
+    this.row = 1
+    this.col = 0
+    this.dx = 10
+  }
+
+  update() {
+    super.update()
+    this.x += this.dx
+  }
+}
+
 export class Katana extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#JapanObjekte")
@@ -619,6 +639,7 @@ export class Player extends AnimatedGameObject {
     this.row = 0
     this.col = 1
     this.speed = 3
+    this.shots = 1
     this.handlers = new HandlerManager([
       new GravityHandler({ 
         jumpForce: -17,
@@ -643,6 +664,13 @@ export class Player extends AnimatedGameObject {
 
   update() {
     super.update()
+  }
+
+  shoot() {
+    if (this.shots > 0) {
+      new SushiShoot(this.x / 64 + 2, this.y / 64 + 1)
+      this.shots--
+    }
   }
 
   move(direction) {
@@ -670,7 +698,7 @@ export class Boss extends AnimatedGameObject {
     super(x, y, {
       sheet: ground,
       layer: "world",
-      collisionTags: ["world"]
+      collisionTags: ["world", "weapon", "damage"]
     })
     this.tileSize = 64
     this.row = 0
@@ -681,19 +709,28 @@ export class Boss extends AnimatedGameObject {
       new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 5})
     ])
   }
+  
+
+  draw(ctx) {
+    ctx.drawImage(
+      this.sheet,
+      this.col * this.tileSize, this.row * this.tileSize, this.tileSize, this.tileSize,
+      this.x, this.y - 32, this.tileSize + 32, this.tileSize + 32
+    )
+  }
 
   update() {
     super.update()
-    if (this.x - Player.x < 640) {
-    followPlayer()
+    if (this.x - Game.player.x < 640) {
+      this.followPlayer()
     }
   }
   
   followPlayer()  {
-    if (Player.x < this.x) {
+    if (Game.player.x < this.x) {
     this.move("left")}
 
-    if (Player.x > this.x) {
+    if (Game.player.x > this.x) {
       this.move("right")
     }
 }
@@ -701,11 +738,10 @@ export class Boss extends AnimatedGameObject {
    if (direction === "left") {
       this.dx = this.dx + (-1) * this.speed
       this.row = 1
-      Camera.shiftBackground(1)
+     
     } else if (direction === "right") {
       this.dx = this.dx + (1) * this.speed
       this.row = 0
-      Camera.shiftBackground(-1)
     }
   }
 

@@ -43,6 +43,20 @@ h1 {
     width: 300%;
 }
 
+
+
+.country {
+fill: #d11197;
+
+}
+
+.Japan {
+
+fill: #d11197;
+}
+
+
+
 .country:hover {
     fill: green;
 }
