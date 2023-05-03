@@ -16,6 +16,7 @@ export default class CollisionDetector {
         pickups: [],
         cave: [],
         damage: [],
+        weapon: [],
 
     }
 
@@ -28,6 +29,8 @@ export default class CollisionDetector {
         pickups: [],
         cave: [],
         damage: [],
+        weapon: [],
+
       }
     }
 

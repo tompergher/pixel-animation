@@ -1,5 +1,5 @@
 import { calculatePenetration } from "./collision_detector.js"
-import { Avocado, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Taco, Wasser } from "./game_objects.js"
+import { Avocado, Boss, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Taco, Wasser } from "./game_objects.js"
 import Game from "./game.js"
 import config from "./config.js"
 
@@ -158,6 +158,11 @@ export class CollisionHandler {
 
     if (collidingObject.collisionTags.includes("damage")) {
       Game.loseLife(5)
+    }
+
+    if (collidingObject.collisionTags.includes("weapon") && gameObject instanceof Boss) {
+      gameObject.destroy()
+      collidingObject.destroy()
     }
 
   }
