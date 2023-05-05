@@ -47,9 +47,11 @@ h1 {
     fill: green;
 }
 
-.Japan:hover {
-    fill: green;
+.country {
+    fill: #d11197;
 }
+
+
 
 
 #map {
