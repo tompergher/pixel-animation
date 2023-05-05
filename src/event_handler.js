@@ -1,5 +1,5 @@
 import { calculatePenetration } from "./collision_detector.js"
-import { Avocado, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Taco, Wasser, coin, desertrose, hirschstab, totenkopf } from "./game_objects.js"
+import { Avocado, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Taco, Wasser, coin, desertrose, hirschstab, totenkopf, mumie } from "./game_objects.js"
 import Game from "./game.js"
 import config from "./config.js"
 
@@ -142,6 +142,8 @@ export class CollisionHandler {
         Game.winLife()
       }
     }
+
+    
     
     if (collidingObject instanceof Kaktus){
       Game.loseLife()
@@ -156,9 +158,7 @@ export class CollisionHandler {
     if (collidingObject instanceof hirschstab){
       Game.loseLife()
     } 
-    
-    
-
+  
     if (collidingObject instanceof Lava){
       Game.gameover()
     }
@@ -178,6 +178,7 @@ export class CollisionHandler {
 
   }
 }
+
 
 export class AnimationHandler {
   constructor(options) {
