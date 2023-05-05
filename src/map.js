@@ -10,17 +10,22 @@ export default class Map {
     this.currentMapFile = mapFile
     this._readMapFile(mapFile)
     const canvas = document.querySelector("#canvas")
+    document.querySelectorAll("audio").forEach((audio) => {audio.pause()})
     if ( mapFile === "maps/map.mexico.txt") {
+      document.querySelector("#audio-mexico").play()
       canvas.style.backgroundImage = "url('res/GlobalJumperBackground.png')"
     } else if ( mapFile === "maps/map.france.txt") {
+      document.querySelector("#audio-paris").play()
       canvas.style.backgroundImage = "url('res/Frankreich.png')"
     } else if ( mapFile === "maps/map.Japan.txt") {
+      document.querySelector("#audio-japan").play()
       canvas.style.backgroundImage = "url('res/Japan Background.png')"
       document.getElementById("character") === "url('res/Characterdesign Japan.png')"
     }
     else if ( mapFile === "maps/map.egypt.txt") {
+    document.querySelector("#audio-egypt").play()
     canvas.style.backgroundImage = "url('res/egypt verenderig.png')"
-  }
+    }
   }
 
   /**
