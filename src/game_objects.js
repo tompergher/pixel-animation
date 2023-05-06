@@ -69,6 +69,91 @@ export class GameObject {
 
 }
 
+export class croissant extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#FranceObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 0
+    this.col = 0
+  }
+}
+
+export class Käse extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#FranceObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 0
+    this.col = 1
+  }
+}
+
+export class parfum extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#FranceObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "item",
+      collisionTags: ["pickups"]
+    })
+
+    this.row = 0
+    this.col = 2
+  }
+}
+
+export class wine extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#FranceObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 1
+    this.col = 0
+  }
+}
+
+export class biker extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#FranceObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 1
+    this.col = 1
+  }
+}
+
+export class frog extends GameObject {
+  constructor(x, y) {
+    const ground = document.querySelector("#FranceObject")
+    super(x, y, {
+      sheet: ground,
+      layer: "world",
+      collisionTags: ["world"]
+    })
+
+    this.row = 1
+    this.col = 2
+  }
+}
+
+
 export class Dia_de_los_Muertos extends GameObject {
   constructor(x, y) {
     const ground = document.querySelector("#MexicoObject")
