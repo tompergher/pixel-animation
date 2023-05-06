@@ -1,5 +1,5 @@
 import { calculatePenetration } from "./collision_detector.js"
-import { Avocado, Boss, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Taco, Wasser } from "./game_objects.js"
+import { Avocado, Boss, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Sushi, Taco, Wasser } from "./game_objects.js"
 import Game from "./game.js"
 import config from "./config.js"
 import Map from "./map.js"
@@ -89,7 +89,7 @@ export class HandlerManager {
     this.handlers.forEach(handler => handler._handleEvents(gameObject))
   }
 }
-
+let bosslife = 3
 export class CollisionHandler {
   _handleEvents(gameObject, options) {
     // Es soll nichts passieren wenn kein anderes Objekt gesetzt wird
@@ -118,7 +118,7 @@ export class CollisionHandler {
         }
       }
     }
-let bosslife = 3
+
     // Wenn das kollidierende Objekt aus Pickups ist, wird es entfernt.
     if (collidingObject.collisionTags.includes("pickups")) {
       collidingObject.destroy()
@@ -137,6 +137,12 @@ let bosslife = 3
       if (collidingObject instanceof Nachos){
         Game.winLife()
       }
+
+      if (collidingObject instanceof Sushi){
+        sscounter++
+      }
+      
+      
     }
     
     if (collidingObject instanceof Kaktus){
