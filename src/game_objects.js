@@ -618,7 +618,6 @@ class AnimatedGameObject extends GameObject {
   }
 }
 let sushishootdirection = 0
-
 export class Player extends AnimatedGameObject {
   constructor(x, y) {
     let img = document.querySelector("#characterMexico")
@@ -639,7 +638,7 @@ export class Player extends AnimatedGameObject {
     this.row = 0
     this.col = 1
     this.speed = 3
-    this.shots = 5
+    this.shots = 0
     if (this.row = 0) {sushishootdirection = 0}
     if (this.row = 1) {sushishootdirection = 1}
     this.handlers = new HandlerManager([
