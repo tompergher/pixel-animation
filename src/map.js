@@ -1,5 +1,5 @@
 import Game from "./game.js"
-import {Player, Backstein, Ice, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg, Sakura, Bonsai, Boss, Sushi, Katana, Origami, desertrose, coin, totenkopf, vase, hirschstab, mumie, Kaktus, Chilli, Nachos, Avocado, Dia_de_los_Muertos, Taco, Stone, cave, Lava, Wasser   } from "./game_objects.js"
+import {Player, Backstein, Ice, Pflasterbeige1reg, Pflastergrau1unreg, Pflastergrau2reg, Pflasterbeige2unreg, Sand, Plattenbeige, Macha, Dirtweg, Sakura, Bonsai, Boss, Sushi, Katana, Origami, desertrose, coin, totenkopf, vase, hirschstab, mumie, Kaktus, Chilli, Nachos, Avocado, Dia_de_los_Muertos, Taco, Stone, cave, Lava, Wasser, wine, biker, frog, croissant, Käse, parfum   } from "./game_objects.js"
 
 /**
  * Diese Klasse liest eine Kartendatei und erstellt die Spiel-Objekte
@@ -14,9 +14,9 @@ export default class Map {
     if ( mapFile === "maps/map.mexico.txt") {
       document.querySelector("#audio-mexico").play()
       canvas.style.backgroundImage = "url('res/GlobalJumperBackground.png')"
-    } else if ( mapFile === "maps/map.france.txt") {
+    } else if ( mapFile === "maps/map-france.txt") {
       document.querySelector("#audio-paris").play()
-      canvas.style.backgroundImage = "url('res/Frankreich.png')"
+      canvas.style.backgroundImage = "url('res/Frankreich-Recovered.png')"
     } else if ( mapFile === "maps/map.Japan.txt") {
       document.querySelector("#audio-japan").play()
       canvas.style.backgroundImage = "url('res/Japan Background.png')"
@@ -53,10 +53,12 @@ export default class Map {
     if ( tileType === "y" ) { new Sushi(x, y) }
     if ( tileType === "z" ) { new Katana(x, y) }
     if ( tileType === "o" ) { new Origami(x, y,) }
-    
-    
-    
-    
+    if ( tileType === "w" ) { new wine(x, y,) }
+    if ( tileType === "B" ) { new biker(x, y,) }
+    if ( tileType === "F" ) { new frog(x, y,) }
+    if ( tileType === "G" ) { new croissant(x, y,) }
+    if ( tileType === "K" ) { new Käse(x, y,) }
+    if ( tileType === "O" ) { new parfum(x, y,) }
     if ( tileType === "r" ) { new desertrose(x, y) }
     if ( tileType === "C" ) { new coin(x, y) }
     if ( tileType === "t" ) { new totenkopf(x, y) }
