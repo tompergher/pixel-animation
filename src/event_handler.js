@@ -137,9 +137,9 @@ export class CollisionHandler {
       if (collidingObject instanceof Nachos){
         Game.winLife()
       }
-
+      let sscounter = 0
       if (collidingObject instanceof Sushi){
-        sscounter++
+        sscounter = sscounter + 1
       }
       
       
