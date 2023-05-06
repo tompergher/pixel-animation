@@ -89,7 +89,7 @@ export class HandlerManager {
     this.handlers.forEach(handler => handler._handleEvents(gameObject))
   }
 }
-let bosslife = 3
+
 export class CollisionHandler {
   _handleEvents(gameObject, options) {
     // Es soll nichts passieren wenn kein anderes Objekt gesetzt wird
@@ -165,7 +165,7 @@ export class CollisionHandler {
     if (collidingObject.collisionTags.includes("damage")) {
       Game.loseLife(5)
     }
-
+    let bosslife = 1
     if (collidingObject.collisionTags.includes("weapon") && gameObject instanceof Boss) {
       bosslife = bosslife -1
       collidingObject.destroy()

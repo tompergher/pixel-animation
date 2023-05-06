@@ -4,6 +4,9 @@ import Camera from "./camera.js"
 import TileRegistry from "./tile_registry.js"
 import EventHandler from "./event_handler.js"
 import InputHandler from "./event_handler.js"
+let sakuracc = 0
+
+
 
 
 /**
@@ -18,8 +21,13 @@ export default class Game {
   static running = false;
   static currentFrame = 0;
   static lastTimeDamage = 0;
+  
 
-  constructor() {
+
+
+  
+  
+    constructor() {
     this.tileSize = 64
     this.canvas = document.querySelector("#canvas")
     this.canvas.width = 26 * this.tileSize
@@ -31,6 +39,10 @@ export default class Game {
 
     Game.loadMap("maps/map.mexico.txt")
 
+    
+   
+    
+    
     document.querySelector("#startbutton").addEventListener("click", () => {
       StartGame5()
     })
@@ -112,6 +124,8 @@ export default class Game {
     
 
   }
+
+  
  
 
 
@@ -139,6 +153,11 @@ export default class Game {
     lifeElement.textContent = lifeCounter + 1
 
   }
+
+  static SakuraCounter() {
+sakuracc = sakuracc + 1}
+
+  
 
   static reduceLifeby3() {
     const lifeElement = document.querySelector("#life")
@@ -215,3 +234,4 @@ function StartGame5() {
   document.querySelector("#startbutton").style.display = "none"
 
 }
+
