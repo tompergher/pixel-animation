@@ -617,7 +617,7 @@ class AnimatedGameObject extends GameObject {
     this.dy = 0
   }
 }
-
+let sushishootdirection = 0
 
 export class Player extends AnimatedGameObject {
   constructor(x, y) {
@@ -639,7 +639,9 @@ export class Player extends AnimatedGameObject {
     this.row = 0
     this.col = 1
     this.speed = 3
-    this.shots = 1
+    this.shots = 5
+    if (this.row = 0) {sushishootdirection = 0}
+    if (this.row = 1) {sushishootdirection = 1}
     this.handlers = new HandlerManager([
       new GravityHandler({ 
         jumpForce: -17,
@@ -647,6 +649,7 @@ export class Player extends AnimatedGameObject {
         gravityForce: 1 }),
       new CollisionHandler(),
       new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 4})
+      
     ])
   }
 
@@ -668,9 +671,14 @@ export class Player extends AnimatedGameObject {
 
   shoot() {
     if (this.shots > 0) {
-      new SushiShoot(this.x / 64 + 2, this.y / 64 + 1)
-      this.shots--
-    }
+      //if (sushishootdirection = 0 ) {
+        new SushiShoot(this.x / 64 + 2, this.y / 64 + 1)
+      this.shots--}
+
+     // if (sushishootdirection = 1) {new SushiShoot(this.x/ -64 -2, this.y / 64 + 1)
+    //this.shots--
+    //}
+    
   }
 
   move(direction) {
@@ -700,13 +708,14 @@ export class Boss extends AnimatedGameObject {
       layer: "world",
       collisionTags: ["world", "weapon", "damage"]
     })
+    
     this.tileSize = 64
     this.row = 0
     this.col = 0
-    this.speed = 2
+    this.speed = 5
     this.handlers = new HandlerManager([
       new CollisionHandler(),
-      new AnimationHandler({ framesPerAnimation: 9, numberOfFrames: 5})
+      new AnimationHandler({ framesPerAnimation: 5, numberOfFrames: 5})
     ])
   }
   
@@ -715,13 +724,13 @@ export class Boss extends AnimatedGameObject {
     ctx.drawImage(
       this.sheet,
       this.col * this.tileSize, this.row * this.tileSize, this.tileSize, this.tileSize,
-      this.x, this.y - 32, this.tileSize + 32, this.tileSize + 32
+      this.x, this.y - 64, this.tileSize + 64, this.tileSize + 64
     )
   }
 
   update() {
     super.update()
-    if (this.x - Game.player.x < 640) {
+    if (this.x - Game.player.x < 1000) {
       this.followPlayer()
     }
   }
@@ -737,11 +746,11 @@ export class Boss extends AnimatedGameObject {
   move(direction) {
    if (direction === "left") {
       this.dx = this.dx + (-1) * this.speed
-      this.row = 1
+      this.row = 0
      
     } else if (direction === "right") {
       this.dx = this.dx + (1) * this.speed
-      this.row = 0
+      this.row = 1
     }
   }
 
