@@ -4,7 +4,8 @@ import Camera from "./camera.js"
 import TileRegistry from "./tile_registry.js"
 import EventHandler from "./event_handler.js"
 import InputHandler from "./event_handler.js"
-let sakuracc = 0
+
+
 
 
 
@@ -154,8 +155,7 @@ export default class Game {
 
   }
 
-  static SakuraCounter() {
-sakuracc = sakuracc + 1}
+  
 
   
 
@@ -227,6 +227,8 @@ sakuracc = sakuracc + 1}
     }
   }
 }
+
+
 
 function StartGame5() {
 

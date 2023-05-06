@@ -1,5 +1,5 @@
 import { calculatePenetration } from "./collision_detector.js"
-import { Avocado, Boss, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Sushi, Taco, Wasser } from "./game_objects.js"
+import { Avocado, Boss, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Sushi, Taco, Wasser, Sakura } from "./game_objects.js"
 import Game from "./game.js"
 import config from "./config.js"
 import Map from "./map.js"
@@ -137,10 +137,14 @@ export class CollisionHandler {
       if (collidingObject instanceof Nachos){
         Game.winLife()
       }
-      let sscounter = 0
-      if (collidingObject instanceof Sushi){
-        sscounter = sscounter + 1
+
+      if (collidingObject instanceof Sakura){
+        Game.SakuraCounter()
       }
+      
+      //if (collidingObject instanceof Sushi){
+       // sscounter = sscounter + 1
+      //}
       
       
     }
@@ -176,6 +180,11 @@ export class CollisionHandler {
       
       }
     }
+
+    if(_sakuracc = 1) {
+      Map.barrier.forEach((el) => {
+         el.destroy()}
+    )}
       //Map.barrier.forEach((el) => {
        // el.destroy()
 
@@ -212,4 +221,9 @@ export class AnimationHandler {
     }
 
   }
+}
+let sakuracc = 0
+function SakuraCounter() {
+  sakuracc = sakuracc + 1
+console.log(parseInt(sakuracc))
 }

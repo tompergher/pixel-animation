@@ -49,7 +49,7 @@ export default class Map {
     if ( tileType === "n" ) { new Bonsai(x, y) }
     if ( tileType === "x" ) { new Boss(x, y) }
     if ( tileType === "y" ) { new Sushi(x, y) }
-    if ( tileType === "Y" ) { Map.barrier.push(new Pflasterbeige1reg(x, y)) }
+    if ( tileType === "Y" ) { Map.barrier.push(new Pflasterbeige1reg(x, y))}
     if ( tileType === "z" ) { new Katana(x, y) }
     if ( tileType === "o" ) { new Origami(x, y,) }
     

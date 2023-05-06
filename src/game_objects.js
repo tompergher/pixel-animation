@@ -652,6 +652,9 @@ export class Player extends AnimatedGameObject {
     ])
   }
 
+  
+    
+
   draw(ctx) {
     ctx.drawImage(
       this.sheet,
