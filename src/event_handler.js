@@ -2,6 +2,7 @@ import { calculatePenetration } from "./collision_detector.js"
 import { Avocado, Boss, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Taco, Wasser } from "./game_objects.js"
 import Game from "./game.js"
 import config from "./config.js"
+import Map from "./map.js"
 
 
 export default class InputHandler {
@@ -117,7 +118,7 @@ export class CollisionHandler {
         }
       }
     }
-
+let bosslife = 3
     // Wenn das kollidierende Objekt aus Pickups ist, wird es entfernt.
     if (collidingObject.collisionTags.includes("pickups")) {
       collidingObject.destroy()
@@ -160,12 +161,29 @@ export class CollisionHandler {
     }
 
     if (collidingObject.collisionTags.includes("weapon") && gameObject instanceof Boss) {
-      gameObject.destroy()
+      bosslife = bosslife -1
       collidingObject.destroy()
     }
 
+    if(bosslife <= 0) {gameObject.destroy()
+      collidingObject.destroy()
+      
+      }
+    }
+      //Map.barrier.forEach((el) => {
+       // el.destroy()
+
+
+    //gameObject.destroy()
+      //collidingObject.destroy()
+      //Map.barrier.forEach((el) => {
+        //el.destroy()
+     // })
+
   }
-}
+
+
+
 
 export class AnimationHandler {
   constructor(options) {

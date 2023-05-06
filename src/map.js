@@ -6,6 +6,9 @@ import {Player, Backstein, Ice, Pflasterbeige1reg, Pflastergrau1unreg, Pflasterg
  * an den Stellen die in der Karte angegeben sind.
  */
 export default class Map {
+
+  static barrier = new Array()
+
   constructor(mapFile) {
     this.currentMapFile = mapFile
     this._readMapFile(mapFile)
@@ -46,7 +49,7 @@ export default class Map {
     if ( tileType === "n" ) { new Bonsai(x, y) }
     if ( tileType === "x" ) { new Boss(x, y) }
     if ( tileType === "y" ) { new Sushi(x, y) }
-    if ( tileType === "Y" ) { new SushiShoot(x, y) }
+    if ( tileType === "Y" ) { Map.barrier.push(new Pflasterbeige1reg(x, y)) }
     if ( tileType === "z" ) { new Katana(x, y) }
     if ( tileType === "o" ) { new Origami(x, y,) }
     
