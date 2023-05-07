@@ -1,5 +1,5 @@
 import { calculatePenetration } from "./collision_detector.js"
-import { Avocado, Boss, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Sushi, Taco, Wasser, Sakura } from "./game_objects.js"
+import { Avocado, Boss, Chilli, Dia_de_los_Muertos, Kaktus, Lava, Nachos, Player, Sushi, Taco, Wasser, Sakura, Bonsai, Katana } from "./game_objects.js"
 import Game from "./game.js"
 import config from "./config.js"
 import Map from "./map.js"
@@ -139,7 +139,7 @@ export class CollisionHandler {
       }
 
       if (collidingObject instanceof Sakura){
-        Game.SakuraCounter()
+        Game.winLife()
       }
       
       //if (collidingObject instanceof Sushi){
@@ -161,6 +161,14 @@ export class CollisionHandler {
       Game.gameover()
     }
 
+    if (collidingObject instanceof Bonsai){
+      Game.loseLife()
+    }
+
+    if (collidingObject instanceof Katana){
+      Game.loseLife()
+    }
+
 
     if (collidingObject.collisionTags.includes("cave")) {
       document.querySelector("#overlay").style.display = "flex"
@@ -170,7 +178,7 @@ export class CollisionHandler {
     if (collidingObject.collisionTags.includes("damage")) {
       Game.loseLife(5)
     }
-    let bosslife = 1
+    let bosslife = 7
     if (collidingObject.collisionTags.includes("weapon") && gameObject instanceof Boss) {
       bosslife = bosslife -1
       collidingObject.destroy()
