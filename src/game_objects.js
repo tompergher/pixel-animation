@@ -710,7 +710,7 @@ export class Boss extends AnimatedGameObject {
     this.tileSize = 64
     this.row = 0
     this.col = 0
-    this.speed = 5
+    this.speed = 9
     this.handlers = new HandlerManager([
       new CollisionHandler(),
       new AnimationHandler({ framesPerAnimation: 5, numberOfFrames: 5})
@@ -728,7 +728,7 @@ export class Boss extends AnimatedGameObject {
 
   update() {
     super.update()
-    if (this.x - Game.player.x < 1000) {
+    if (this.x - Game.player.x < 850) {
       this.followPlayer()
     }
   }
