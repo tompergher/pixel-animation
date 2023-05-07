@@ -178,7 +178,7 @@ export class CollisionHandler {
     if (collidingObject.collisionTags.includes("damage")) {
       Game.loseLife(5)
     }
-    let bosslife = 7
+    let bosslife = 1
     if (collidingObject.collisionTags.includes("weapon") && gameObject instanceof Boss) {
       bosslife = bosslife -1
       collidingObject.destroy()

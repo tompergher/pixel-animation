@@ -312,7 +312,7 @@ export class SushiShoot extends GameObject {
     })
     this.row = 1
     this.col = 0
-    this.dx = 10
+    this.dx = 7
   }
 
   update() {
