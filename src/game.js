@@ -117,7 +117,7 @@ export default class Game {
     //reset lifeCounter to 3
     const lifeElement = document.querySelector("#life")
     let lifeCounter = parseInt(lifeElement.textContent)
-    lifeElement.textContent = 100
+    lifeElement.textContent = 3
 
 
     console.log(Game.map.currentMapFile)
