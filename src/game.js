@@ -214,7 +214,7 @@ export default class Game {
       if (Game.player.x > 780) {
         this.camera.centerObject(Game.player)
       } else {
-        this.camera.centerCoordinate(970 - 3 * 64, 350)
+        this.camera.centerCoordinate(970 - 2 * 64, 353)
       }
 
     }
