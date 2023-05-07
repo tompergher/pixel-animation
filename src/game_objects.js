@@ -617,7 +617,7 @@ class AnimatedGameObject extends GameObject {
     this.dy = 0
   }
 }
-let sushishootdirection = 0
+
 export class Player extends AnimatedGameObject {
   constructor(x, y) {
     let img = document.querySelector("#characterMexico")
@@ -639,8 +639,7 @@ export class Player extends AnimatedGameObject {
     this.col = 1
     this.speed = 3
     this.shots = 10
-    if (this.row = 0) {sushishootdirection = 0}
-    if (this.row = 1) {sushishootdirection = 1}
+    
     this.handlers = new HandlerManager([
       new GravityHandler({ 
         jumpForce: -17,
@@ -673,14 +672,11 @@ export class Player extends AnimatedGameObject {
 
   shoot() {
     if (this.shots > 0) {
-      //if (sushishootdirection = 0 ) {
+      
         new SushiShoot(this.x / 64 + 2, this.y / 64 + 1)
       this.shots--}
 
-     // if (sushishootdirection = 1) {new SushiShoot(this.x/ -64 -2, this.y / 64 + 1)
-    //this.shots--
-    //}
-    
+     
   }
 
   move(direction) {
